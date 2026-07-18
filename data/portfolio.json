@@ -1,0 +1,124 @@
+{
+  "items": [
+    {
+      "title": "Vodworks Gift Set",
+      "desc": "Premium branded gift set for Vodworks team",
+      "cat": "gifts",
+      "image": "images/vodworks-gift-set.png"
+    },
+    {
+      "title": "ibex Onboarding Kit",
+      "desc": "Complete welcome kit for ibex new hires — 500 units",
+      "cat": "employee",
+      "image": "images/ibex-onboarding-kit.png"
+    },
+    {
+      "title": "Vodworks Swag Box",
+      "desc": "Curated swag box with branded merchandise",
+      "cat": "gifts",
+      "image": "images/vodworks-swag-box.png"
+    },
+    {
+      "title": "Escorts Corporate Set",
+      "desc": "Executive gift sets for Escorts clients",
+      "cat": "gifts",
+      "image": "images/escorts-gift-set.png"
+    },
+    {
+      "title": "Fiber Mountain Kit",
+      "desc": "Branded onboarding kit with full packaging",
+      "cat": "employee",
+      "image": "images/fiber-mountain-kit.png"
+    },
+    {
+      "title": "Mozack Welcome Box",
+      "desc": "Custom welcome kits with tissue paper finish",
+      "cat": "employee",
+      "image": "images/mozack-welcome-box.png"
+    },
+    {
+      "title": "Unlayer Corporate Set",
+      "desc": "Cross-market corporate gifting for Unlayer",
+      "cat": "gifts",
+      "image": "images/unlayer-corporate-set.png"
+    },
+    {
+      "title": "Noon Brand Merch",
+      "desc": "Branded merchandise line for noon",
+      "cat": "apparel",
+      "image": "images/noon-brand-merch.png"
+    },
+    {
+      "title": "ibex Awards Kits",
+      "desc": "Premium award presentation kits",
+      "cat": "gifts",
+      "image": "images/ibex-awards-kits.png"
+    },
+    {
+      "title": "Technomites Full Kit",
+      "desc": "Complete branded kit for Technomites team",
+      "cat": "employee",
+      "image": "images/technomites-full-kit.png"
+    },
+    {
+      "title": "Branded Notebooks",
+      "desc": "Custom hardcover notebooks with foil branding",
+      "cat": "stationery",
+      "image": "images/branded-notebooks.png"
+    },
+    {
+      "title": "Unifonic Exhibition Kit",
+      "desc": "GCC exhibition merchandise for Unifonic",
+      "cat": "events",
+      "image": "images/unifonic-exhibition-kit.png"
+    },
+    {
+      "title": "Retrocausal Keychain",
+      "desc": "Custom metal keychains with laser engraving",
+      "cat": "stationery",
+      "image": "images/retrocausal-keychain.png"
+    },
+    {
+      "title": "Noon Academy Apparel",
+      "desc": "Branded apparel line for noon Academy",
+      "cat": "apparel",
+      "image": "images/noon-academy-apparel.png"
+    },
+    {
+      "title": "Contour Software Set",
+      "desc": "Tech-forward gift set for Contour Software",
+      "cat": "gifts",
+      "image": "images/contour-software-set.png"
+    },
+    {
+      "title": "Lincoln Corners Mugs",
+      "desc": "Premium ceramic mugs with full-wrap printing",
+      "cat": "stationery",
+      "image": "images/lincoln-corners-mugs.png"
+    },
+    {
+      "title": "Investkar Flasks",
+      "desc": "Branded insulated flasks for Investkar",
+      "cat": "gifts",
+      "image": "images/investkar-flasks.png"
+    },
+    {
+      "title": "Macpac Keychain & Pen",
+      "desc": "Dual-branded keychain and pen set",
+      "cat": "stationery",
+      "image": "images/macpac-keychain-pen.jpg"
+    },
+    {
+      "title": "Macpac Pen Box",
+      "desc": "Premium pen gift box with custom ribbon",
+      "cat": "packaging",
+      "image": "images/macpac-pen-box.jpg"
+    },
+    {
+      "title": "EXD Gift Box",
+      "desc": "Luxury gift box with branded tissue and filler",
+      "cat": "packaging",
+      "image": "images/exd-gift-box.jpg"
+    }
+  ]
+}

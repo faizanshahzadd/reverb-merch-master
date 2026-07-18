@@ -1,0 +1,34 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: portfolio
+    label: "Our Work (Portfolio)"
+    label_singular: "Portfolio Item"
+    files:
+      - name: items
+        label: "Portfolio Items"
+        file: data/portfolio.json
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "string" }
+              - label: "Category"
+                name: "cat"
+                widget: "select"
+                options:
+                  - { label: "Corporate Gifts", value: "gifts" }
+                  - { label: "Employee Kits", value: "employee" }
+                  - { label: "Apparel", value: "apparel" }
+                  - { label: "Events", value: "events" }
+                  - { label: "Packaging", value: "packaging" }
+                  - { label: "Stationery", value: "stationery" }
+              - { label: "Image", name: "image", widget: "image" }
