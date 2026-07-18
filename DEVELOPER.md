@@ -7,8 +7,14 @@
 
 ```
 reverb-merch-master/
-├── index.html          ← The full website (self-contained, all images embedded as base64)
-├── images/             ← Full-resolution original images for reference / replacement
+├── index.html          ← The full website (hero/case-study images embedded as base64;
+│                          portfolio grid is rendered from data/portfolio.json)
+├── data/
+│   └── portfolio.json  ← "Our Work" portfolio items (title, description, category, image path)
+├── admin/               ← Decap CMS admin panel (edit portfolio + upload images from the browser)
+│   ├── index.html
+│   └── config.yml
+├── images/             ← Full-resolution images referenced by the portfolio grid
 │   ├── logo.jpg
 │   ├── vodworks-gift-set.png
 │   ├── ibex-onboarding-kit.png
@@ -30,6 +36,7 @@ reverb-merch-master/
 │   ├── macpac-keychain-pen.jpg
 │   ├── macpac-pen-box.jpg
 │   ├── exd-gift-box.jpg
+│   ├── uploads/         ← New images uploaded via the admin panel land here
 │   └── logos/          ← Drop client logo PNGs here (see Clients section below)
 └── DEVELOPER.md        ← This file
 ```
@@ -58,36 +65,30 @@ Change these 2 values to completely rebrand the site.
 
 ---
 
-## Replacing Portfolio Images
+## Managing Portfolio Items ("Our Work")
 
-The site embeds images as base64 inside index.html. To swap images:
+The portfolio grid is **data-driven**: `index.html` fetches `data/portfolio.json` at
+page load and renders each item into the grid (filtering and the click-to-zoom
+lightbox both keep working automatically — nothing else to wire up).
 
-**Option A — Quick (recommended for 1–2 swaps):**
-1. Convert new image to base64: https://www.base64-image.de/
-2. In index.html, find the old base64 block (search by alt text e.g. `alt="ibex-onboarding-kit"`)
-3. Replace the `data:image/...base64,...` value with the new one
+**Option A — Admin panel (recommended, no coding):**
+Use the `/admin` panel (see "Admin Panel" section below) to add, edit, reorder,
+or delete portfolio items and upload new images directly from the browser.
 
-**Option B — Cleaner (for full rebuild):**
-1. Replace files in `images/` folder with same filename
-2. Run the Python build script (request from developer — regenerates index.html with new images embedded)
-
----
-
-## Adding New Portfolio Items
-
-Find this line in index.html:
-```html
-<!-- PORTFOLIO ITEMS -->
-```
-Add a new item following this pattern:
-```html
-<div class="pf-item" data-cat="gifts" onclick="openLB(this)"
-  data-title="Client Name Gift Set" data-desc="Description here">
-  <img src="images/your-new-image.png" alt="Client Name Gift Set">
-  <div class="pf-ov"><div><h4>Client Name Gift Set</h4><p>Description here</p></div></div>
-</div>
+**Option B — Edit the JSON directly:**
+Open `data/portfolio.json` and add an entry to the `items` array:
+```json
+{
+  "title": "Client Name Gift Set",
+  "desc": "Description here",
+  "cat": "gifts",
+  "image": "images/your-new-image.png"
+}
 ```
 Categories: `gifts` `employee` `apparel` `events` `packaging` `stationery`
+
+Place the referenced image file in `images/` (or `images/uploads/`), then commit
+and push — Netlify redeploys automatically.
 
 ---
 
@@ -102,7 +103,9 @@ Currently shows text fallback. To show actual logos:
 
 ## Contact Form
 
-**On Netlify (drag & drop deploy):** Works automatically. No config needed.
+**On Netlify:** Works automatically once deployed — no config needed. Submissions
+appear under the site's **Forms** tab in the Netlify dashboard (exportable as CSV,
+with optional email notifications under Forms → Settings → Form notifications).
 
 **On other hosts:** Replace form with Formspree:
 1. Sign up at formspree.io
@@ -126,18 +129,76 @@ To connect real Instagram feed:
 
 ## Deploying to Netlify (Free)
 
-1. Go to netlify.com → Sign up free
-2. Drag the entire `reverb-merch-master/` folder onto the deploy area
-3. Done — live URL in ~30 seconds
-4. Add custom domain in Site Settings → Domain Management
+The site now lives in a git repo (needed for the admin panel to work — see below).
+Deploy from Git rather than drag-and-drop so the repo stays connected and every
+push (including admin panel edits) auto-deploys.
+
+**1. Push the repo to GitHub** (already done for the initial setup — repeat only
+if starting fresh):
+```
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git branch -M main
+git push -u origin main
+```
+
+**2. Create the Netlify site from Git:**
+1. Go to [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project**
+2. Choose **GitHub**, authorize Netlify, and pick this repo
+3. Build settings: leave **Build command** empty and **Publish directory** as `/`
+   (this is a static site — nothing to build)
+4. Click **Deploy site** — live URL in ~30 seconds
+5. Add a custom domain in **Site configuration → Domain management**
+
+**3. Enable the admin panel (Netlify Identity + Git Gateway):**
+1. In the site dashboard: **Site configuration → Identity → Enable Identity**
+2. Under **Identity → Registration**, set to **Invite only** (recommended, so
+   the public can't self-register admin accounts)
+3. Under **Identity → Services**, enable **Git Gateway** — this lets the admin
+   panel commit changes to the repo on your behalf without you managing GitHub
+   tokens
+4. Go to the **Identity** tab → **Invite users** → enter your email → follow the
+   invite link to set a password
+5. Visit `https://YOUR-SITE.netlify.app/admin` and log in
+
+Every push to `main` (whether from your own `git push` or from an edit made in
+`/admin`) triggers a new Netlify deploy automatically.
+
+---
+
+## Admin Panel (Decap CMS)
+
+`/admin` is a browser-based content editor (Decap CMS, formerly Netlify CMS) —
+no coding needed for day-to-day content changes.
+
+**What it can do:**
+- Add, edit, reorder, and delete "Our Work" portfolio items (title, description,
+  category, image) — edits `data/portfolio.json` under the hood
+- Upload new images through the browser — stored in `images/uploads/` and
+  committed to the repo automatically
+
+**What it does *not* do:**
+- Manage contact form submissions — those are handled entirely by Netlify Forms
+  (see "Contact Form" section above); Decap CMS has no visibility into form data
+- Edit arbitrary page copy (hero text, pricing, WhatsApp number, etc.) — those
+  remain manual find-and-replace edits in `index.html` per the "Quick Edits"
+  section above
+
+**Requirements:** the site must be deployed from Git (not drag-and-drop) with
+Identity + Git Gateway enabled — see the deploy steps above. Each editor needs
+to be invited as an Identity user; there's no separate CMS password.
 
 ---
 
 ## Deploying to Custom Host (cPanel etc.)
 
 1. Upload all files via FTP/File Manager
-2. Place `index.html` and `images/` in `public_html/`
+2. Place `index.html`, `data/`, and `images/` in `public_html/`
 3. Contact form: use Formspree (see above)
+4. Note: the `/admin` panel requires Netlify Identity + Git Gateway and will
+   **not** work on a non-Netlify host
 
 ---
 
