@@ -129,34 +129,14 @@ To connect real Instagram feed:
 
 ## Content Security Policy (`_headers`)
 
-The site ships a strict CSP for the homepage (`index.html`) that only allows the
-three inline `<script>` blocks currently in the file, identified by SHA-256 hash
-(no `unsafe-inline`). **If you or an AI assistant edit any inline `<script>...</script>`
-content in `index.html`, its hash changes and the script will silently stop
-running** (no visible error outside the browser console) until the `_headers`
-file is updated with the new hash. To regenerate hashes after an edit, run:
-```powershell
-$content = Get-Content -Raw -Encoding UTF8 index.html
-[regex]::Matches($content, '(?s)<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>') | ForEach-Object {
-  $bytes = [System.Text.Encoding]::UTF8.GetBytes($_.Groups[1].Value)
-  "sha256-" + [Convert]::ToBase64String([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes))
-}
-```
-Then paste the resulting hashes into the `script-src` directive in `_headers`.
-
-**Gotcha (bit us once):** git can normalize CRLF→LF line endings on commit,
-which silently changes every hash computed from your local working copy —
-the site shipped with mismatched hashes for hours until caught. `.gitattributes`
-(`eol=lf`) now forces LF on checkout, but if you ever see the mockup tool or
-portfolio grid stop working after a push, **recompute the hash from the live
-deployed site**, not your local file:
-```powershell
-$content = (Invoke-WebRequest -Uri "https://YOUR-SITE.netlify.app" -UseBasicParsing).Content
-[regex]::Matches($content, '(?s)<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>') | ForEach-Object {
-  $bytes = [System.Text.Encoding]::UTF8.GetBytes($_.Groups[1].Value)
-  "sha256-" + [Convert]::ToBase64String([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes))
-}
-```
+The site ships a CSP covering both the homepage and `/admin/*`. `script-src`
+uses `'unsafe-inline'` (not hash-locked) specifically so that editing an inline
+`<script>` block in `index.html` — including AI-assisted edits — never silently
+breaks the page. An earlier hash-locked version broke the mockup tool, stats
+counter, and nav twice from routine edits before being reverted; the remaining
+protections (XSS-escaping on portfolio data via `escapeHTML()`, `noopener
+noreferrer` on external links, frame/referrer/permissions headers) cover the
+actual risk without that fragility.
 
 `/admin/*` uses a separate, more permissive policy since Decap CMS needs
 `unpkg.com`, GitHub/Gravatar APIs, and `blob:`/inline scripts to function.
