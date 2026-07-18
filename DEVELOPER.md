@@ -9,6 +9,8 @@
 reverb-merch-master/
 ├── index.html          ← The full website (hero/case-study images embedded as base64;
 │                          portfolio grid is rendered from data/portfolio.json)
+├── css/
+│   └── style.css       ← All page styling (extracted from index.html's <style> block)
 ├── data/
 │   └── portfolio.json  ← "Our Work" portfolio items (title, description, category, image path)
 ├── admin/               ← Decap CMS admin panel (edit portfolio + upload images from the browser)
@@ -38,6 +40,7 @@ reverb-merch-master/
 │   ├── exd-gift-box.jpg
 │   ├── uploads/         ← New images uploaded via the admin panel land here
 │   └── logos/          ← Drop client logo PNGs here (see Clients section below)
+├── README.md           ← Project overview / quick start (points here for detail)
 └── DEVELOPER.md        ← This file
 ```
 
@@ -55,13 +58,17 @@ reverb-merch-master/
 
 ---
 
-## Brand Colors (CSS variables at top of <style>)
+## Brand Colors (CSS variables at top of css/style.css)
 
 ```css
 --p: #6B2D8B;   /* Purple  */
 --m: #D4006A;   /* Magenta */
 ```
 Change these 2 values to completely rebrand the site.
+
+All CSS lives in `css/style.css` (moved out of index.html's inline `<style>`
+block for easier editing). It's linked via a single `<link rel="stylesheet"
+href="css/style.css">` in the `<head>` — no build step, just edit and refresh.
 
 ---
 
@@ -124,6 +131,30 @@ To connect real Instagram feed:
 4. Replace the static `.ig-item` divs with a JS fetch from:
    `https://graph.instagram.com/me/media?fields=id,media_url,thumbnail_url,permalink&access_token=YOUR_TOKEN`
    (~2 hours dev work)
+
+---
+
+## Mobile Layout Notes
+
+**Hero section — grid track blowout gotcha:** `.hero` uses CSS Grid
+(`minmax(0,1fr) minmax(0,1fr)` on desktop, `minmax(0,1fr)` on mobile). The
+`minmax(0,...)` is load-bearing, not decorative — a bare `1fr` lets a grid
+track grow to fit the **min-content size of its widest descendant**, and the
+hero's marquee strip (`.mstrip-inner`, ~10 unwrapped 115px images) has an
+unwrapped intrinsic width of ~1240px. With a bare `1fr`, that stretched the
+whole `.hero` grid track to 1240px on mobile, centering the heading in a box
+wider than the screen and shoving it off-canvas to the right (clipped by
+`.hero`'s own `overflow:hidden`, so it just looked blank instead of
+scrollable). If you add another grid with a wide/unwrapped child (another
+marquee, a wide table, etc.), give it `minmax(0,1fr)` columns too, or it'll
+silently reproduce this bug on narrow viewports.
+
+**Mobile nav menu:** the hamburger (`#hbg`) toggles `.open` on `#navLinks`,
+`#navbar`, `#hbg` itself, and `body` (`body.menu-open{overflow:hidden}` locks
+background scroll while the menu is open). The hamburger icon animates into
+an X via CSS transforms on its three `<span>`s (no separate close button
+needed). The menu also closes on Escape and on tapping any nav link — see
+`toggleMenu()`/`closeMenu()` near the bottom of `index.html`'s `<script>`.
 
 ---
 
@@ -223,6 +254,15 @@ to be invited as an Identity user; there's no separate CMS password.
 Built in HTML5 Canvas — no backend needed. User uploads a PNG logo,
 it composites onto 8 product shapes. Drag to reposition, sliders for
 size and opacity. WhatsApp button links to wa.me/923183241305.
+
+**Adding/editing a product shape:** `draw()` dispatches through two lookup
+objects instead of a long if/else chain — `GROUND_SHADOWS` (product name →
+`[cx, by, rx, ry]` for the floor shadow ellipse, only needed for products that
+sit on a surface) and `PRODUCT_DRAWERS` (product name → a `c => {...}` function
+that draws that shape with color `c` using the shared `ctx`/`lx()`/`dk()`/
+`gloss()` helpers). To add a new product: add an entry to the `prods` array
+(name/emoji/colors), then a matching `PRODUCT_DRAWERS['Your Product']` entry
+(and a `GROUND_SHADOWS` entry too, if it needs a floor shadow).
 
 ---
 
