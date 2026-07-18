@@ -19,5 +19,74 @@
     }
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    var ItemsPreview = createClass({
+      render: function () {
+        var items = this.props.entry.getIn(["data", "items"]);
+        if (!items) return h("div", {}, "No items yet.");
+        var cards = items.map(function (item, i) {
+          var image = item.get("image");
+          var url = image ? this.props.getAsset(image) : null;
+          return h(
+            "div",
+            {
+              key: i,
+              style: {
+                display: "flex",
+                gap: "14px",
+                padding: "12px",
+                borderBottom: "1px solid #e5e5e5",
+                alignItems: "center",
+                fontFamily: "sans-serif",
+              },
+            },
+            h("img", {
+              src: url ? url.toString() : "",
+              style: {
+                width: "72px",
+                height: "72px",
+                objectFit: "cover",
+                borderRadius: "6px",
+                background: "#f0f0f0",
+                flexShrink: 0,
+              },
+            }),
+            h(
+              "div",
+              {},
+              h("div", { style: { fontWeight: 700, fontSize: "15px" } }, item.get("title")),
+              h(
+                "div",
+                { style: { color: "#555", fontSize: "13px", margin: "2px 0" } },
+                item.get("desc")
+              ),
+              h(
+                "span",
+                {
+                  style: {
+                    display: "inline-block",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    color: "#6B2D8B",
+                    background: "#f2e6f7",
+                    padding: "2px 8px",
+                    borderRadius: "10px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.03em",
+                  },
+                },
+                item.get("cat")
+              )
+            )
+          );
+        }, this);
+        return h("div", {}, cards);
+      },
+    });
+
+    if (window.CMS) {
+      window.CMS.registerPreviewTemplate("items", ItemsPreview);
+    }
+  </script>
 </body>
 </html>
