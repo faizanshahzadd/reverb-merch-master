@@ -127,6 +127,28 @@ To connect real Instagram feed:
 
 ---
 
+## Content Security Policy (`_headers`)
+
+The site ships a strict CSP for the homepage (`index.html`) that only allows the
+three inline `<script>` blocks currently in the file, identified by SHA-256 hash
+(no `unsafe-inline`). **If you or an AI assistant edit any inline `<script>...</script>`
+content in `index.html`, its hash changes and the script will silently stop
+running** (no visible error outside the browser console) until the `_headers`
+file is updated with the new hash. To regenerate hashes after an edit, run:
+```powershell
+$content = Get-Content -Raw -Encoding UTF8 index.html
+[regex]::Matches($content, '(?s)<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>') | ForEach-Object {
+  $bytes = [System.Text.Encoding]::UTF8.GetBytes($_.Groups[1].Value)
+  "sha256-" + [Convert]::ToBase64String([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes))
+}
+```
+Then paste the resulting hashes into the `script-src` directive in `_headers`.
+
+`/admin/*` uses a separate, more permissive policy since Decap CMS needs
+`unpkg.com`, GitHub/Gravatar APIs, and `blob:`/inline scripts to function.
+
+---
+
 ## Deploying to Netlify (Free)
 
 The site now lives in a git repo (needed for the admin panel to work — see below).
