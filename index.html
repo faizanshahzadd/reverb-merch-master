@@ -357,6 +357,7 @@ footer{background:var(--dark);color:#fff;padding:56px 40px 26px}
   .nav-links{display:none;position:fixed;inset:0;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999}
   .nav-links.open{display:flex}
   .hbg{display:flex}
+  nav.menu-open{backdrop-filter:none}
   .hero{grid-template-columns:1fr;padding:96px 18px 40px;text-align:center}
   .hero-gallery{display:none}
   .mstrip{display:block}
@@ -868,7 +869,7 @@ function openLB(el){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('sc',scrollY>50));
-function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');document.getElementById('navbar').classList.toggle('menu-open');}
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
 function updateCD(){
   const now=new Date(),t=new Date(now.getFullYear(),10,15);
