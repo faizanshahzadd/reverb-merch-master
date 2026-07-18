@@ -144,6 +144,20 @@ $content = Get-Content -Raw -Encoding UTF8 index.html
 ```
 Then paste the resulting hashes into the `script-src` directive in `_headers`.
 
+**Gotcha (bit us once):** git can normalize CRLF→LF line endings on commit,
+which silently changes every hash computed from your local working copy —
+the site shipped with mismatched hashes for hours until caught. `.gitattributes`
+(`eol=lf`) now forces LF on checkout, but if you ever see the mockup tool or
+portfolio grid stop working after a push, **recompute the hash from the live
+deployed site**, not your local file:
+```powershell
+$content = (Invoke-WebRequest -Uri "https://YOUR-SITE.netlify.app" -UseBasicParsing).Content
+[regex]::Matches($content, '(?s)<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>') | ForEach-Object {
+  $bytes = [System.Text.Encoding]::UTF8.GetBytes($_.Groups[1].Value)
+  "sha256-" + [Convert]::ToBase64String([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes))
+}
+```
+
 `/admin/*` uses a separate, more permissive policy since Decap CMS needs
 `unpkg.com`, GitHub/Gravatar APIs, and `blob:`/inline scripts to function.
 
