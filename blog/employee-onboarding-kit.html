@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="What to include in an employee onboarding kit — a practical guide to welcome kits that actually set the right tone for new hires.">
+<title>What to Include in an Employee Onboarding Kit — Reverb Merch</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="../index.html"><img src="../images/inline/img-1edc3932e0ab.jpg" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html#services">Services</a></li>
+    <li><a href="../index.html#portfolio">Portfolio</a></li>
+    <li><a href="../index.html#pricing">Pricing</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='../index.html#contact'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero">
+  <p class="article-cat">Employee Kits</p>
+  <h1>What to Include in an Employee Onboarding Kit</h1>
+  <p class="article-meta">A well-branded welcome kit sets the tone for the entire employment relationship.</p>
+</section>
+
+<article class="article-body">
+  <a class="article-back" href="../index.html#blog">← Back to Blog</a>
+
+  <p>A new hire's first day forms an impression that outlasts almost everything else in the onboarding process. What's sitting on their desk when they arrive says more about your company culture than any handbook. Here's what actually belongs in a kit worth handing out.</p>
+
+  <h2>1. Something They'll Actually Use</h2>
+  <p>Skip the gimmicks. A quality notebook, a mug that survives the office dishwasher, or a decent water bottle gets used every single day — and every use is a small, positive touchpoint with your brand. Novelty items get shelved after week one.</p>
+
+  <h2>2. A Piece of Apparel That Fits the Culture</h2>
+  <p>A hoodie or t-shirt only works if people actually want to wear it outside the office. Invest in decent fabric and a design that doesn't scream "corporate swag" — subtle branding outperforms a giant logo across the chest almost every time.</p>
+
+  <h2>3. Tech Essentials</h2>
+  <p>A power bank, a wireless charger, or a decent set of earbuds signals that the company invests in things people genuinely need. These also tend to travel — to coffee shops, client meetings, home — extending your brand's reach quietly.</p>
+
+  <h2>4. A Personal Touch</h2>
+  <p>A handwritten welcome card, or a note from the hiring manager, costs almost nothing but changes how the whole kit is received. It signals the kit came from people, not just a warehouse.</p>
+
+  <h2>5. Packaging That Matches the Effort</h2>
+  <p>The unboxing moment matters as much as the contents. A branded box with tissue paper and thoughtful arrangement turns a stack of items into an experience — and that experience is what gets photographed and shared internally, which is free, authentic employer-branding content.</p>
+
+  <h2>6. Plan for Scale</h2>
+  <p>If you're hiring continuously, build a kit that can be reordered in batches without re-negotiating specs every time. A standing relationship with one supplier for recurring onboarding runs is far more efficient than sourcing fresh each time — for both cost and consistency.</p>
+
+  <div class="article-cta">
+    <p><strong>Hiring soon and need onboarding kits sorted?</strong></p>
+    <a href="https://wa.me/923183241305?text=Hi! I'd like to discuss employee onboarding kits." target="_blank" rel="noopener noreferrer">Chat With Us on WhatsApp →</a>
+  </div>
+</article>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="../images/inline/img-1edc3932e0ab.jpg" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="../index.html#portfolio">Portfolio</a></li><li><a href="../index.html#faq">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+</script>
+</body>
+</html>
