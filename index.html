@@ -249,6 +249,9 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
     <div class="cl-box">Vodworks</div><div class="cl-box">Retrocausal</div><div class="cl-box">noon Academy</div>
     <div class="cl-box">EXD</div><div class="cl-box">Fiber.pk</div><div class="cl-box">ibex BPO</div>
     <div class="cl-box">Vodworks Labs</div><div class="cl-box">Macpac Films</div><div class="cl-box">The Green Ark</div>
+    <div class="cl-box"><img src="images/logos/toyo.jpg" alt="TOYO" loading="lazy"></div><div class="cl-box"><img src="images/logos/iba-karachi.jpg" alt="IBA Karachi" loading="lazy"></div><div class="cl-box"><img src="images/logos/nust.jpg" alt="NUST" loading="lazy"></div>
+    <div class="cl-box"><img src="images/logos/darson-tyres.jpg" alt="Darson Tyres" loading="lazy"></div><div class="cl-box"><img src="images/logos/ziauddin-university.jpg" alt="Ziauddin University" loading="lazy"></div><div class="cl-box"><img src="images/logos/bahria-university.jpg" alt="Bahria University" loading="lazy"></div>
+    <div class="cl-box"><img src="images/logos/comsats-university.jpg" alt="COMSATS University" loading="lazy"></div>
   </div>
   <p class="cl-more">+ <strong>230 more companies</strong> across Pakistan</p>
 </section>
@@ -275,8 +278,9 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
         </div>
       </div>
       <div class="fb-screens" id="fbScreens">
-        <p class="grev-empty">Review screenshots coming soon — <a href="https://www.facebook.com/reverbmerchofficial/reviews" target="_blank" rel="noopener noreferrer">see them live on Facebook →</a></p>
+        <a href="images/reviews/facebook-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/facebook-review-1.jpg" alt="Facebook review from Muhammad Rashid and Amna Noor" loading="lazy"></a>
       </div>
+      <p class="rev-more-lnk"><a href="https://www.facebook.com/reverbmerchofficial/reviews" target="_blank" rel="noopener noreferrer">See more on Facebook →</a></p>
     </div>
     <div class="rev-card rvr" id="googleRevCard">
       <div class="grev-head">
@@ -542,8 +546,11 @@ document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function stars(n){const r=Math.round(n||0);return '★★★★★☆☆☆☆☆'.slice(5-r,10-r);}
   function showFallback(){
-    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">Google Reviews</span></div><div class="grev-count">See what clients say on Google</div>';
-    sliderEl.innerHTML='<p class="grev-empty">Live reviews will appear here once connected — in the meantime, check the link below.</p>';
+    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">5.0</span><span class="grev-stars">★★★★★</span></div><div class="grev-count">Real reviews from Google</div>';
+    sliderEl.innerHTML='<div class="fb-screens">'+
+      '<a href="images/reviews/google-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-1.jpg" alt="Google reviews from Aleena Ahtesham, Naveed Ahmad, and Riffat Nazia" loading="lazy"></a>'+
+      '<a href="images/reviews/google-review-2.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-2.jpg" alt="Google reviews from Riffat Nazia, Jumana Rizvi, and Tanveer Ali" loading="lazy"></a>'+
+    '</div>';
   }
   function updateHeroBadge(data){
     const el=document.getElementById('heroRating');
