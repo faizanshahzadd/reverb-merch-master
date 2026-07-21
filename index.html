@@ -146,7 +146,11 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
     <button class="fb" data-f="packaging">Packaging</button>
     <button class="fb" data-f="stationery">Stationery</button>
   </div>
-  <div class="pf-grid" id="pfGrid"></div>
+  <div class="pf-carousel-wrap">
+    <button class="pf-arrow pf-prev" id="pfPrev" aria-label="Scroll left">←</button>
+    <div class="pf-grid" id="pfGrid"></div>
+    <button class="pf-arrow pf-next" id="pfNext" aria-label="Scroll right">→</button>
+  </div>
 </section>
 
 <section class="before-after" id="beforeafter">
@@ -245,7 +249,7 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
     <div class="cl-box">ibex</div><div class="cl-box">Unifonic</div><div class="cl-box">noon</div>
     <div class="cl-box">Unlayer</div><div class="cl-box">Technomites</div><div class="cl-box">Fiber Mountain</div>
     <div class="cl-box">Escorts</div><div class="cl-box">Mozack</div><div class="cl-box">Contour</div>
-    <div class="cl-box">Lincoln Corners</div><div class="cl-box">Investkar</div><div class="cl-box">Macpac</div>
+    <div class="cl-box">Lincoln Corners</div><div class="cl-box">Investkar</div>
     <div class="cl-box">Vodworks</div><div class="cl-box">Retrocausal</div><div class="cl-box">noon Academy</div>
     <div class="cl-box">EXD</div><div class="cl-box">Fiber.pk</div><div class="cl-box">ibex BPO</div>
     <div class="cl-box">Vodworks Labs</div><div class="cl-box">Macpac Films</div><div class="cl-box">The Green Ark</div>
@@ -256,16 +260,7 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
   <p class="cl-more">+ <strong>230 more companies</strong> across Pakistan</p>
 </section>
 
-<section class="testimonials" id="testimonials">
-  <p class="section-label">What Clients Say</p>
-  <h2 class="section-title">Brands That Came Back Again & Again</h2>
-  <div class="ts-grid">
-    <div class="ts-card rv"><div class="ts-qm">"</div><div class="ts-stars">★★★★★</div><blockquote>"Reverb Merch delivered 500 onboarding kits with zero delays. The quality exceeded expectations and our new hires absolutely loved them."</blockquote><div class="ts-author"><div class="ts-av">A</div><div><div class="ts-name">Ahmed K.</div><div class="ts-role">HR Director · ibex</div></div></div></div>
-    <div class="ts-card rv"><div class="ts-qm">"</div><div class="ts-stars">★★★★★</div><blockquote>"The attention to packaging detail sets Reverb apart. Our clients actually kept the boxes. That's how good the unboxing experience was."</blockquote><div class="ts-author"><div class="ts-av">Z</div><div><div class="ts-name">Zara T.</div><div class="ts-role">Operations · Unlayer</div></div></div></div>
-  </div>
-</section>
-
-<section class="testimonials" id="reviews" style="background:var(--light)">
+<section class="testimonials" id="reviews">
   <p class="section-label">Verified Feedback</p>
   <h2 class="section-title">What Clients Say on Facebook & Google</h2>
   <div class="rev-grid">
@@ -481,7 +476,7 @@ function renderPortfolio(items){
 </div>`;
   }).join('');
 }
-fetch('data/portfolio.json').then(r=>r.json()).then(d=>renderPortfolio(d.items||[])).catch(()=>{});
+fetch('data/portfolio.json').then(r=>r.json()).then(d=>{renderPortfolio(d.items||[]);updatePfArrows();}).catch(()=>{});
 document.getElementById('pfGrid').addEventListener('click',e=>{
   const el=e.target.closest('.pf-item');
   if(el) openLB(el);
@@ -531,7 +526,17 @@ const so=new IntersectionObserver(e=>{if(e[0].isIntersecting){document.querySele
 so.observe(document.querySelector('.stats'));
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');}),{threshold:.1});
 document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>ro.observe(el));
-document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;document.querySelectorAll('.pf-item').forEach(i=>i.classList.toggle('hidden',f!=='all'&&i.dataset.cat!==f));}));
+document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;document.querySelectorAll('.pf-item').forEach(i=>i.classList.toggle('hidden',f!=='all'&&i.dataset.cat!==f));const pg=document.getElementById('pfGrid');pg.scrollTo({left:0,behavior:'instant'});updatePfArrows();}));
+function updatePfArrows(){
+  const pg=document.getElementById('pfGrid'),prev=document.getElementById('pfPrev'),next=document.getElementById('pfNext');
+  if(!pg)return;
+  prev.disabled=pg.scrollLeft<=4;
+  next.disabled=pg.scrollLeft>=pg.scrollWidth-pg.clientWidth-4;
+}
+document.getElementById('pfPrev').addEventListener('click',()=>{const pg=document.getElementById('pfGrid');pg.scrollBy({left:-((pg.querySelector('.pf-item:not(.hidden)')?.offsetWidth||260)+14)*2,behavior:'smooth'});});
+document.getElementById('pfNext').addEventListener('click',()=>{const pg=document.getElementById('pfGrid');pg.scrollBy({left:((pg.querySelector('.pf-item:not(.hidden)')?.offsetWidth||260)+14)*2,behavior:'smooth'});});
+document.getElementById('pfGrid').addEventListener('scroll',updatePfArrows);
+window.addEventListener('resize',updatePfArrows);
 document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q').addEventListener('click',()=>{const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');});});
 // GOOGLE REVIEWS
 (function(){
