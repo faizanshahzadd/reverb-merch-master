@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Reverb Merch is a Karachi-based corporate gifting and branded merchandise company, serving 600+ clients across Pakistan for 4+ years.">
+<title>About Us | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero g5">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="article-cat">About Us</p>
+  <h1>Built for Brands That Care About Impressions</h1>
+  <p class="article-meta">Karachi-based, Pakistan-focused, and obsessed with the details other vendors skip.</p>
+</section>
+
+<article class="article-body">
+  <p>Reverb Merch is a corporate gifting and branded merchandise company based in Karachi, serving clients across Pakistan. We handle the full process: sourcing, branding, packaging, and delivery, so you brief us once and we handle the rest.</p>
+
+  <h2>What We Believe</h2>
+  <p>Branded merchandise shouldn't be an afterthought. When you hand someone a gift, whether it's a client, a new hire, or an exhibition visitor, it should make them remember your brand for the right reasons: quality, thoughtfulness, and attention to detail.</p>
+
+  <h2>Who We Work With</h2>
+  <p>Over 4+ years, we've delivered merchandise for 600+ clients across Pakistan, from tech startups and BPOs to universities and manufacturing brands, ranging from 10-unit luxury kits to 500-unit onboarding programmes.</p>
+
+  <h2>How We Work</h2>
+  <p>Every order goes through the same process: you share a brief, we design mockups with your logo within 24 hours, you review and approve, and we produce, pack, and deliver on time. No surprises, no vague timelines.</p>
+
+  <div class="article-cta">
+    <p><strong>Want to work with us?</strong></p>
+    <a href="https://wa.me/923183241305?text=Hi! I'd like to learn more about Reverb Merch." target="_blank" rel="noopener noreferrer">Chat With Us on WhatsApp →</a>
+  </div>
+</article>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+</script>
+</body>
+</html>

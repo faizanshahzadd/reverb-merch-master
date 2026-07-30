@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Browse 500+ corporate gifts, employee kits, apparel, and event merch delivered across Pakistan. Real work for real brands.">
+<title>Our Work | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="lb" id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbCloseBtn">✕</button>
+    <img id="lbImg" src="" alt="">
+    <div class="lb-cap"><h3 id="lbTitle"></h3><p id="lbDesc"></p></div>
+  </div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero g3">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="article-cat">Our Work</p>
+  <h1>500+ Orders Delivered Across Pakistan</h1>
+  <p class="article-meta">Real brands, real merch, real results.</p>
+</section>
+
+<section class="portfolio" style="padding-top:60px">
+  <div class="pf-filters">
+    <button class="fb active" data-f="all">All Work</button>
+    <button class="fb" data-f="gifts">Corporate Gifts</button>
+    <button class="fb" data-f="employee">Employee Kits</button>
+    <button class="fb" data-f="apparel">Apparel</button>
+    <button class="fb" data-f="events">Events</button>
+    <button class="fb" data-f="packaging">Packaging</button>
+    <button class="fb" data-f="stationery">Stationery</button>
+  </div>
+  <div class="pf-carousel-wrap">
+    <button class="pf-arrow pf-prev" id="pfPrev" aria-label="Scroll left">←</button>
+    <div class="pf-grid" id="pfGrid"></div>
+    <button class="pf-arrow pf-next" id="pfNext" aria-label="Scroll right">→</button>
+  </div>
+  <p style="text-align:center;margin-top:40px"><a href="contact.html" class="btn-p" style="display:inline-block;text-decoration:none">Start Your Order →</a></p>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+
+function escapeHTML(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function renderPortfolio(items){
+  const grid=document.getElementById('pfGrid');
+  grid.innerHTML=items.map(it=>{
+    const title=escapeHTML(it.title), desc=escapeHTML(it.desc), image=escapeHTML(it.image), cat=escapeHTML(it.cat);
+    return `
+<div class="pf-item" data-cat="${cat}" data-title="${title}" data-desc="${desc}">
+  <img src="${image}" alt="${title}">
+  <div class="pf-ov"><div><h4>${title}</h4><p>${desc}</p></div></div>
+</div>`;
+  }).join('');
+}
+fetch('data/portfolio.json').then(r=>r.json()).then(d=>{renderPortfolio(d.items||[]);updatePfArrows();}).catch(()=>{});
+document.getElementById('pfGrid').addEventListener('click',e=>{
+  const el=e.target.closest('.pf-item');
+  if(el) openLB(el);
+});
+document.getElementById('lb').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) e.currentTarget.classList.remove('open');
+});
+document.getElementById('lbCloseBtn').addEventListener('click',()=>document.getElementById('lb').classList.remove('open'));
+function openLB(el){
+  document.getElementById('lbImg').src=el.querySelector('img').src;
+  document.getElementById('lbTitle').textContent=el.dataset.title||'';
+  document.getElementById('lbDesc').textContent=el.dataset.desc||'';
+  document.getElementById('lb').classList.add('open');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('open');});
+document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;document.querySelectorAll('.pf-item').forEach(i=>i.classList.toggle('hidden',f!=='all'&&i.dataset.cat!==f));const pg=document.getElementById('pfGrid');pg.scrollTo({left:0,behavior:'instant'});updatePfArrows();}));
+function updatePfArrows(){
+  const pg=document.getElementById('pfGrid'),prev=document.getElementById('pfPrev'),next=document.getElementById('pfNext');
+  if(!pg)return;
+  prev.disabled=pg.scrollLeft<=4;
+  next.disabled=pg.scrollLeft>=pg.scrollWidth-pg.clientWidth-4;
+}
+document.getElementById('pfPrev').addEventListener('click',()=>{const pg=document.getElementById('pfGrid');pg.scrollBy({left:-((pg.querySelector('.pf-item:not(.hidden)')?.offsetWidth||260)+14)*2,behavior:'smooth'});});
+document.getElementById('pfNext').addEventListener('click',()=>{const pg=document.getElementById('pfGrid');pg.scrollBy({left:((pg.querySelector('.pf-item:not(.hidden)')?.offsetWidth||260)+14)*2,behavior:'smooth'});});
+document.getElementById('pfGrid').addEventListener('scroll',updatePfArrows);
+window.addEventListener('resize',updatePfArrows);
+</script>
+</body>
+</html>

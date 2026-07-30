@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Minimum order quantities, production timelines, delivery, file formats, samples, and payment methods for corporate merch orders in Pakistan.">
+<title>FAQs | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero g6">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="article-cat">FAQs</p>
+  <h1>Frequently Asked Questions</h1>
+  <p class="article-meta">Everything you need to know before placing an order.</p>
+</section>
+
+<section class="faq" style="padding-top:60px">
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q">What is the minimum order quantity?</div><div class="faq-a"><p>Our minimum order is 10 units for premium kits and 50 units for standard single-item orders. We also accept custom quotes for larger volume orders.</p></div></div>
+    <div class="faq-item"><div class="faq-q">How long does production take?</div><div class="faq-a"><p>Standard orders take 10-14 working days. Rush orders (7 days) available for certain products. Exhibition and event orders: please contact us as early as possible.</p></div></div>
+    <div class="faq-item"><div class="faq-q">Do you deliver nationwide?</div><div class="faq-a"><p>Yes, we deliver across Pakistan, with Karachi-based production and nationwide logistics coordination.</p></div></div>
+    <div class="faq-item"><div class="faq-q">What file format do you need for the logo?</div><div class="faq-a"><p>We prefer vector files (AI, EPS, SVG) for the cleanest output. PNG files with transparent backgrounds also work well.</p></div></div>
+    <div class="faq-item"><div class="faq-q">Can I see a sample before the full order?</div><div class="faq-a"><p>Yes. We produce a physical sample for most products before full production. Sample costs are credited towards your order if you proceed.</p></div></div>
+    <div class="faq-item"><div class="faq-q">What payment methods do you accept?</div><div class="faq-a"><p>Bank transfer, Easypaisa, and JazzCash. 50% advance on confirmation, balance before dispatch.</p></div></div>
+  </div>
+  <p style="text-align:center;margin-top:40px">Still have questions? <a href="contact.html" style="color:var(--p);font-weight:700;text-decoration:none">Get in touch →</a></p>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q').addEventListener('click',()=>{const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');});});
+</script>
+</body>
+</html>

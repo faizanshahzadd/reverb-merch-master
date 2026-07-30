@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Get a free quote for corporate gifts, employee kits, or branded merchandise in Pakistan. WhatsApp, email, or fill out our form for a response within 24 hours.">
+<title>Contact Us | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="contact" style="padding-top:150px">
+  <div class="ct-layout">
+    <div>
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Ready to Make<br>Your Brand Memorable?</h2>
+      <div class="ct-info">
+        <div class="ct-item"><div class="ct-icon">💬</div><div class="ct-item-text"><p>WhatsApp (fastest response)</p><a href="https://wa.me/923183241305" target="_blank" rel="noopener noreferrer">+92 318 3241305</a></div></div>
+        <div class="ct-item"><div class="ct-icon">📸</div><div class="ct-item-text"><p>Instagram</p><a href="https://instagram.com/reverbmerch" target="_blank" rel="noopener noreferrer">@reverbmerch</a></div></div>
+        <div class="ct-item"><div class="ct-icon">📧</div><div class="ct-item-text"><p>Email</p><a href="mailto:hello@reverbmerch.com">hello@reverbmerch.com</a></div></div>
+        <div class="ct-item"><div class="ct-icon">📍</div><div class="ct-item-text"><p>Based in</p><a>Karachi, Pakistan</a></div></div>
+      </div>
+    </div>
+    <div class="ct-form">
+      <form name="contact" netlify netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="fr">
+          <div class="fg"><label>Your Name</label><input type="text" name="name" placeholder="Ahmed Ali" required></div>
+          <div class="fg"><label>Company</label><input type="text" name="company" placeholder="Your Company"></div>
+        </div>
+        <div class="fg"><label>Email or WhatsApp</label><input type="text" name="contact" placeholder="email@company.com or +92..." required></div>
+        <div class="fr">
+          <div class="fg"><label>Product Type</label><select name="product"><option>Corporate Gifts</option><option>Employee Kits</option><option>Exhibition Merch</option><option>Apparel</option><option>Packaging</option><option>Other</option></select></div>
+          <div class="fg"><label>Quantity</label><input type="text" name="quantity" placeholder="e.g. 100 units"></div>
+        </div>
+        <div class="fg"><label>Tell Us More</label><textarea name="message" placeholder="Occasion, budget, deadline..."></textarea></div>
+        <button type="submit" class="ct-submit">Send Enquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="tm-overlay" id="tm-overlay">
+  <div class="tm-box">
+    <div class="tm-check">✓</div>
+    <h3>Enquiry Sent!</h3>
+    <p>Thanks for reaching out! Our team will get back to you within 24 hours. For a faster response, message us on WhatsApp.</p>
+    <button class="tm-close" id="tmCloseBtn">Close</button>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+document.getElementById('tmCloseBtn').addEventListener('click',()=>document.getElementById('tm-overlay').classList.remove('open'));
+(function(){
+  var form = document.querySelector('form[name="contact"]');
+  if (!form) return;
+  var submitBtn = form.querySelector('.ct-submit');
+  function encode(data){
+    return Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    }).join("&");
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {};
+    new FormData(form).forEach(function(v, k){ data[k] = v; });
+    submitBtn.disabled = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode(data)
+    }).then(function(){
+      document.getElementById('tm-overlay').classList.add('open');
+      form.reset();
+    }).catch(function(){
+      alert('Something went wrong sending your enquiry. Please try WhatsApp instead.');
+    }).finally(function(){
+      submitBtn.disabled = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Corporate gifting, employee kits, exhibition merch, branded apparel, custom packaging, and tech merchandise. Full-service branded merch in Pakistan.">
+<title>Our Services | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero g1">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="article-cat">What We Do</p>
+  <h1>One Partner, Every Merch Need</h1>
+  <p class="article-meta">Corporate gifts, employee kits, exhibition merch, and more, all branded and delivered across Pakistan.</p>
+</section>
+
+<section class="services" style="padding-top:60px">
+  <div class="svc-grid">
+    <div class="svc-card"><span class="svc-icon">🎁</span><h3>Corporate Gifting</h3><p>Premium curated gift sets for clients, events, and executives. Fully branded, beautifully boxed.</p></div>
+    <div class="svc-card"><span class="svc-icon">🧑‍💼</span><h3>Employee Kits</h3><p>Onboarding packs that make new hires feel the culture from day one. Welcome kits that wow.</p></div>
+    <div class="svc-card"><span class="svc-icon">🏆</span><h3>Exhibition Merch</h3><p>Stand-out branded merchandise for trade shows, exhibitions, and corporate events across Pakistan.</p></div>
+    <div class="svc-card"><span class="svc-icon">💍</span><h3>Wedding Favours</h3><p>Personalised wedding favour kits: custom boxes, engraved gifts, branded packaging.</p></div>
+    <div class="svc-card"><span class="svc-icon">👕</span><h3>Branded Apparel</h3><p>T-shirts, hoodies, caps, and team wear with embroidery, screen printing, or DTG printing.</p></div>
+    <div class="svc-card"><span class="svc-icon">📦</span><h3>Custom Packaging</h3><p>Branded boxes, tissue paper, ribbon, and filler for a premium unboxing experience.</p></div>
+    <div class="svc-card"><span class="svc-icon">💻</span><h3>Tech Merchandise</h3><p>Power banks, USB drives, wireless chargers, earbuds: all with your brand on them.</p></div>
+    <div class="svc-card"><span class="svc-icon">🏅</span><h3>Awards & Recognition</h3><p>Trophy sets, plaques, and premium gift packs for employee recognition and awards nights.</p></div>
+  </div>
+  <p style="text-align:center;margin-top:40px"><a href="contact.html" class="btn-p" style="display:inline-block;text-decoration:none">Get a Quote →</a></p>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Transparent corporate gifting pricing in Pakistan: Starter, Standard, and Premium tiers from PKR 800/unit. Free samples and quotes available.">
+<title>Pricing | Reverb Merch</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo"><a href="index.html"><img src="images/logo.png" alt="Reverb Merch"></a></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="location.href='contact.html'">Get a Quote</button>
+  <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="article-hero g4">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="article-cat">Pricing</p>
+  <h1>Transparent Pricing For Every Budget</h1>
+  <p class="article-meta">No hidden fees, no vague "contact us for pricing." Real numbers, upfront.</p>
+</section>
+
+<section class="pricing" style="padding-top:60px">
+  <div class="pr-grid">
+    <div class="pr-card"><div class="pr-tier">Starter</div><div class="pr-amt">PKR 800<span>/unit</span></div><div class="pr-moq">Min. order: 50 units</div><ul class="pr-feats"><li>Single product branding</li><li>Basic packaging</li><li>1 logo placement</li><li>Standard delivery</li></ul><a href="https://wa.me/923183241305" class="pr-btn">Get a Quote</a></div>
+    <div class="pr-card feat"><div class="pr-badge">⭐ Most Popular</div><div class="pr-tier">Standard</div><div class="pr-amt">PKR 2,500<span>/unit</span></div><div class="pr-moq">Min. order: 25 units</div><ul class="pr-feats"><li>Multi-product kit</li><li>Branded box + tissue</li><li>Full logo package</li><li>Priority production</li></ul><a href="https://wa.me/923183241305" class="pr-btn">Get a Quote</a></div>
+    <div class="pr-card"><div class="pr-tier">Premium</div><div class="pr-amt">PKR 6,000<span>/unit</span></div><div class="pr-moq">Min. order: 10 units</div><ul class="pr-feats"><li>Full luxury kit</li><li>Premium packaging</li><li>Custom inserts + ribbon</li><li>Nationwide delivery</li></ul><a href="https://wa.me/923183241305" class="pr-btn">Get a Quote</a></div>
+  </div>
+  <div class="pr-actions">
+    <a href="https://wa.me/923183241305?text=Hi! I'd like to request a physical sample before placing a full order." target="_blank" rel="noopener noreferrer" class="pr-action-btn">📦 Request a Free Sample First</a>
+    <a href="https://wa.me/923183241305?text=Hi! I'd like to schedule a call to discuss a corporate order." target="_blank" rel="noopener noreferrer" class="pr-action-btn pr-action-outline">📞 Book a Call With Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <img src="images/logo.png" alt="Reverb Merch">
+      <p>Premium corporate gifting and branded merchandise for companies across Pakistan.</p>
+    </div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/923183241305">WhatsApp</a></li><li>Karachi, Pakistan</li></ul></div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Reverb Merch. All rights reserved. Karachi, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const isOpen=document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open',isOpen);
+  document.getElementById('hbg').classList.toggle('open',isOpen);
+  document.body.classList.toggle('menu-open',isOpen);
+}
+document.getElementById('hbg').addEventListener('click',toggleMenu);
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('navLinks').classList.remove('open');document.getElementById('navbar').classList.remove('menu-open');document.getElementById('hbg').classList.remove('open');document.body.classList.remove('menu-open');}));
+</script>
+</body>
+</html>
