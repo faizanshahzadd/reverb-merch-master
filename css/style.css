@@ -77,6 +77,7 @@ h1{font-size:clamp(2.1rem,4vw,3.4rem);font-weight:800;line-height:1.1;margin-bot
 .svc-card:hover .svc-icon{transform:scale(1.2) rotate(-5deg)}
 .svc-card h3{font-size:.95rem;font-weight:700;margin-bottom:7px}
 .svc-card p{font-size:.83rem;color:var(--mut);line-height:1.6}
+.svc-card p a{color:var(--p);font-weight:700;text-decoration:none;white-space:nowrap}
 
 /* MOCKUP */
 .mockup-tool{background:#fff}
