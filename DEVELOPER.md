@@ -300,6 +300,29 @@ to be invited as an Identity user; there's no separate CMS password.
 
 ---
 
+## New Design Previews (A / B)
+
+Two complete alternative homepages with the same content as `index.html`:
+
+| Page | Direction | Files |
+|------|-----------|-------|
+| `new-design-a.html` | Bold agency (ref: merchery.co): dark base, huge condensed type, full-bleed video hero, marquees, bento grids | `css/design-a.css`, `js/design-a.js`, `fonts/design-a/` (Anton + Manrope) |
+| `new-design-b.html` | Warm editorial (ref: madebykept.com): cream base, Fraunces serif, multicolour asterisk motif, stickers, tabbed services | `css/design-b.css`, `js/design-b.js`, `fonts/design-b/` (Fraunces + DM Sans) |
+
+Both reuse the shared `js/mockup.js`, `js/social.js` and `js/videos.js`, so
+the mockup tool, live reviews, Instagram feed and videos behave identically on
+all three pages. A small "Preview: Current · Design A · Design B" switcher
+(bottom-left) jumps between them. The previews are `noindex` with a canonical
+pointing at `/`, so they don't compete with the live homepage in search.
+
+**Choosing one:** copy the chosen `new-design-*.html` over `index.html`,
+remove the `<meta name="robots" content="noindex">` line and the
+`.ds-switch` nav, and delete the other preview's files. Inner pages
+(services, pricing, blog …) still use `css/style.css`; restyling them to
+match is a follow-up.
+
+---
+
 ## Homepage Videos
 
 Four short, silent, looping MP4s live in `videos/` (each with a `-poster.jpg`):
