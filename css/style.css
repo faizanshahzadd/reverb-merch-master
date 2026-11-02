@@ -523,8 +523,11 @@ footer{background:var(--dark);color:#fff;padding:56px 40px 26px}
   section{padding:56px 18px}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
   .mkp-layout{grid-template-columns:minmax(0,1fr)}
-  .mkp-ctrl,.mkp-stage{position:static;max-height:none}
-  .mkp-stage{order:-1}
+  .mkp-ctrl{position:static;max-height:none}
+  /* canvas stays pinned under the nav while the controls scroll beneath it */
+  .mkp-stage{display:contents}
+  .mkp-cv-wrap{order:-1;position:sticky;top:62px;z-index:5;box-shadow:0 10px 24px rgba(107,45,139,.18)}
+  .mkp-actions{margin-top:0}
   .mkp-actions{grid-template-columns:1fr 1fr}
   .mkp-actions .mkp-wa{grid-column:span 2}
   .pf-item{flex:0 0 200px}
