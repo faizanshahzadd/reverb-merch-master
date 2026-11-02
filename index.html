@@ -94,7 +94,7 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
   <div class="orb orb2"></div>
   <div class="hero-content">
     <div class="hero-badge">✦ Serving All of Pakistan</div>
-    <div class="hero-rating" id="heroRating" style="display:none"></div>
+    <div class="hero-rating" id="heroRating" data-rating-badge style="display:none"></div>
     <h1>Merch That Makes<br>Your Brand <span class="grad-text">Unforgettable</span></h1>
     <p>Premium corporate gifting, branded merchandise, and employee kits for companies that take their brand seriously.</p>
     <div class="hero-btns">
@@ -104,7 +104,7 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
   </div>
   <div class="hero-visual">
     <div class="hero-gallery">
-      <div class="hi hi-main"><img src="images/inline/img-18f1e4e4f7d9.jpg" alt="ibex onboarding kit"></div>
+      <div class="hi hi-main vid"><video data-autoplay muted loop playsinline preload="none" poster="videos/hero-loop-poster.jpg" aria-label="Branded gift kits we've produced"><source src="videos/hero-loop.mp4" type="video/mp4"></video><button type="button" class="vid-btn" aria-label="Play or pause video"></button></div>
       <div class="hi hi-sm"><img src="images/inline/img-d6ec3a2fb5bc.jpg" alt="Unifonic kit"></div>
       <div class="hi hi-sm"><img src="images/inline/img-543086aad3bf.jpg" alt="Mozack welcome box"></div>
     </div>
@@ -125,6 +125,28 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
   <div class="trust-item">✅ <span>Quality Checked Before Dispatch</span></div>
 </div>
 
+<section class="motion" id="motion">
+  <p class="section-label">See It In Motion</p>
+  <h2 class="section-title">From Logo to Unboxing, Watch It Come Together</h2>
+  <div class="mo-grid">
+    <figure class="mo-main vid">
+      <video data-autoplay muted loop playsinline preload="none" poster="videos/showreel-poster.jpg" aria-label="Reverb Merch showreel: corporate kits we've delivered"><source src="videos/showreel.mp4" type="video/mp4"></video>
+      <button type="button" class="vid-btn" aria-label="Play or pause showreel"></button>
+      <figcaption><strong>Showreel</strong> Real kits for ibex, Noon, Vodworks, Technomites and more</figcaption>
+    </figure>
+    <figure class="mo-side vid">
+      <video data-autoplay muted loop playsinline preload="none" poster="videos/process-poster.jpg" aria-label="Animation of our 4-step process"><source src="videos/process.mp4" type="video/mp4"></video>
+      <button type="button" class="vid-btn" aria-label="Play or pause process video"></button>
+      <figcaption><strong>How it works</strong> Brief → design → approve → deliver</figcaption>
+    </figure>
+    <figure class="mo-side vid">
+      <video data-autoplay muted loop playsinline preload="none" poster="videos/logo-on-everything-poster.jpg" aria-label="One logo shown across mugs, apparel, bags and packaging"><source src="videos/logo-on-everything.mp4" type="video/mp4"></video>
+      <button type="button" class="vid-btn" aria-label="Play or pause logo video"></button>
+      <figcaption><strong>Your logo, everywhere</strong> <a href="#mockup">Try the mockup tool →</a></figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="services" id="services">
   <p class="section-label">What We Do</p>
   <h2 class="section-title">One Partner, Every Merch Need</h2>
@@ -143,26 +165,45 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
 <section class="mockup-tool" id="mockup">
   <p class="section-label">Try It Now</p>
   <h2 class="section-title">See Your Logo On Our Products</h2>
+  <p class="mkp-sub">19 products, real print areas, cylinder wrap on drinkware, and print styles from full colour to gold foil and engraving. Drag the logo to place it, then download your mockup.</p>
   <div class="mkp-layout">
     <div class="mkp-ctrl">
-      <h3>Choose Product</h3>
-      <div class="prod-pick" id="prodPick"></div>
-      <h3 id="colorLbl">Product Color</h3>
-      <div class="swatches" id="swatches"></div>
-      <label class="sl-lbl">Logo Size</label>
-      <input type="range" class="sl" id="slSize" min="20" max="200" value="100">
-      <label class="sl-lbl">Logo Opacity</label>
-      <input type="range" class="sl" id="slOp" min="20" max="100" value="90">
       <div class="upz" id="logoUpz">
         <div class="ui">⬆️</div>
-        <p><strong>Upload Your Logo</strong><br>PNG with transparent background works best</p>
+        <p><strong>Upload Your Logo</strong><br>PNG, JPG or SVG. Drop a file here or tap to browse</p>
         <input type="file" id="logoUp" accept="image/*">
       </div>
-      <a href="https://wa.me/923183241305?text=Hi! I tried your logo mockup tool and I'd like to place an order." class="mkp-wa" target="_blank" rel="noopener noreferrer">💬 WhatsApp Us to Order</a>
+      <h3>Choose Product</h3>
+      <div class="mkp-chips mkp-cats" id="mkpCats"></div>
+      <div class="prod-pick" id="prodPick"></div>
+      <h3 id="colorLbl">Product Colour</h3>
+      <div class="swatches" id="swatches"></div>
+      <h3>Placement</h3>
+      <div class="mkp-chips" id="mkpPresets"></div>
+      <h3>Print Style</h3>
+      <div class="mkp-chips" id="mkpStyles"></div>
+      <label class="sl-lbl" for="slSize">Logo Size</label>
+      <input type="range" class="sl" id="slSize" min="10" max="150" value="85">
+      <label class="sl-lbl" for="slRot">Rotation</label>
+      <input type="range" class="sl" id="slRot" min="-180" max="180" value="0">
+      <label class="sl-lbl" for="slOp">Ink Opacity</label>
+      <input type="range" class="sl" id="slOp" min="20" max="100" value="90">
+      <div class="mkp-toggles">
+        <label><input type="checkbox" id="mkpWhite" checked> Remove white background</label>
+        <label><input type="checkbox" id="mkpClip" checked> Keep inside print area</label>
+        <label><input type="checkbox" id="mkpGuide"> Show print area</label>
+      </div>
     </div>
-    <div class="mkp-cv-wrap">
-      <canvas id="mkpCanvas" width="600" height="480"></canvas>
-      <div class="mkp-hint" id="mkpHint">Upload your logo above to see it on the product</div>
+    <div class="mkp-stage">
+      <div class="mkp-cv-wrap">
+        <canvas id="mkpCanvas" width="600" height="480" aria-label="Logo mockup preview"></canvas>
+        <div class="mkp-hint" id="mkpHint">Upload your logo to see it on the product</div>
+      </div>
+      <div class="mkp-actions">
+        <button type="button" class="mkp-act" id="mkpReset">↺ Reset placement</button>
+        <button type="button" class="mkp-act" id="mkpDownload">⬇ Download mockup</button>
+        <a href="https://wa.me/923183241305?text=Hi! I tried your logo mockup tool and I'd like to place an order." class="mkp-wa" id="mkpWa" target="_blank" rel="noopener noreferrer">💬 WhatsApp Us This Mockup</a>
+      </div>
     </div>
   </div>
 </section>
@@ -293,37 +334,37 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
 
 <section class="testimonials" id="reviews">
   <p class="section-label">Verified Feedback</p>
-  <h2 class="section-title">What Clients Say on Facebook & Google</h2>
+  <h2 class="section-title">What Clients Say on Google &amp; Facebook</h2>
+  <div class="rev-badge-row"><div class="hero-rating" data-rating-badge style="display:none"></div></div>
   <div class="rev-grid">
-    <div class="rev-card rvl" id="fbRevCard">
-      <div class="grev-head">
-        <div class="rev-g-icon" style="background:#e7f0ff;color:#1877f2">f</div>
-        <div>
-          <div class="grev-score-row"><span class="grev-score">Facebook Reviews</span></div>
-          <div class="grev-count">Real feedback from our page</div>
-        </div>
-      </div>
-      <div class="fb-screens" id="fbScreens">
-        <a href="images/reviews/facebook-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/facebook-review-1.jpg" alt="Facebook review from Muhammad Rashid and Amna Noor" loading="lazy"></a>
-      </div>
-      <p class="rev-more-lnk"><a href="https://www.facebook.com/reverbmerchofficial/reviews" target="_blank" rel="noopener noreferrer">See more on Facebook →</a></p>
-    </div>
-    <div class="rev-card rvr" id="googleRevCard">
+    <div class="rev-card" data-reviews="google">
       <div class="grev-head">
         <div class="rev-g-icon">G</div>
-        <div id="grevSummary">
-          <div class="grev-loading">Loading Google reviews…</div>
-        </div>
+        <div class="rv-summary"><div class="grev-loading">Loading Google reviews…</div></div>
       </div>
-      <div class="grev-slider" id="grevSlider"></div>
-      <div class="grev-nav" id="grevNav" style="display:none">
-        <button id="grevPrev" aria-label="Previous review">←</button>
-        <span id="grevDots" class="grev-dots"></span>
-        <button id="grevNext" aria-label="Next review">→</button>
+      <div class="grev-slider rv-slider"></div>
+      <div class="grev-nav rv-nav" style="display:none">
+        <button type="button" class="rv-prev" aria-label="Previous review">←</button>
+        <span class="grev-dots rv-dots"></span>
+        <button type="button" class="rv-next" aria-label="Next review">→</button>
       </div>
+      <p class="rev-more-lnk rv-links"></p>
+    </div>
+    <div class="rev-card" data-reviews="facebook">
+      <div class="grev-head">
+        <div class="rev-g-icon" style="background:#e7f0ff;color:#1877f2">f</div>
+        <div class="rv-summary"><div class="grev-loading">Loading Facebook reviews…</div></div>
+      </div>
+      <div class="grev-slider rv-slider"></div>
+      <div class="grev-nav rv-nav" style="display:none">
+        <button type="button" class="rv-prev" aria-label="Previous review">←</button>
+        <span class="grev-dots rv-dots"></span>
+        <button type="button" class="rv-next" aria-label="Next review">→</button>
+      </div>
+      <p class="rev-more-lnk rv-links"></p>
     </div>
   </div>
-  <p style="text-align:center;margin-top:18px"><a href="https://www.google.com/search?q=reverb+merch+karachi+reviews" target="_blank" rel="noopener noreferrer" style="color:var(--p);font-weight:700;font-size:.88rem;text-decoration:none">See full Google reviews →</a> &nbsp;·&nbsp; <a href="testimonials.html" style="color:var(--p);font-weight:700;font-size:.88rem;text-decoration:none">Read all testimonials →</a></p>
+  <p class="rev-all"><a href="testimonials.html">Read all testimonials →</a></p>
 </section>
 
 <section class="instagram" id="instagram">
@@ -534,168 +575,9 @@ document.getElementById('pfNext').addEventListener('click',()=>{const pg=documen
 document.getElementById('pfGrid').addEventListener('scroll',updatePfArrows);
 window.addEventListener('resize',updatePfArrows);
 document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q').addEventListener('click',()=>{const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');});});
-// INSTAGRAM FEED
-(function(){
-  const grid=document.getElementById('igGrid');
-  if(!grid)return;
-  const igSvg='<svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>';
-  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function showFallback(){
-    grid.innerHTML='<div class="ig-fallback"><p>See our latest posts, behind-the-scenes, and client unboxings on Instagram.</p><a href="https://instagram.com/reverbmerch" target="_blank" rel="noopener noreferrer">Visit @reverbmerch →</a></div>';
-  }
-  fetch('/.netlify/functions/instagram-feed').then(r=>r.json()).then(data=>{
-    if(!data||!data.configured||data.error||!data.posts||!data.posts.length){showFallback();return;}
-    grid.innerHTML=data.posts.map(p=>`<a class="ig-item" href="${esc(p.permalink)}" target="_blank" rel="noopener noreferrer"><img src="${esc(p.image)}" alt="${esc(p.caption)||'@reverbmerch post'}" loading="lazy"><div class="ig-ov">${igSvg}</div></a>`).join('');
-  }).catch(showFallback);
-})();
-// GOOGLE REVIEWS
-(function(){
-  const summaryEl=document.getElementById('grevSummary');
-  const sliderEl=document.getElementById('grevSlider');
-  const navEl=document.getElementById('grevNav');
-  const dotsEl=document.getElementById('grevDots');
-  const prevBtn=document.getElementById('grevPrev');
-  const nextBtn=document.getElementById('grevNext');
-  if(!summaryEl)return;
-  let idx=0,items=[],timer=null;
-  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function stars(n){const r=Math.round(n||0);return '★★★★★☆☆☆☆☆'.slice(5-r,10-r);}
-  function showFallback(){
-    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">5.0</span><span class="grev-stars">★★★★★</span></div><div class="grev-count">Real reviews from Google</div>';
-    sliderEl.innerHTML='<div class="fb-screens">'+
-      '<a href="images/reviews/google-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-1.jpg" alt="Google reviews from Aleena Ahtesham, Naveed Ahmad, and Riffat Nazia" loading="lazy"></a>'+
-      '<a href="images/reviews/google-review-2.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-2.jpg" alt="Google reviews from Riffat Nazia, Jumana Rizvi, and Tanveer Ali" loading="lazy"></a>'+
-    '</div>';
-  }
-  function updateHeroBadge(data){
-    const el=document.getElementById('heroRating');
-    if(!el||!data||!data.rating)return;
-    el.innerHTML='<span class="hr-stars">★</span> '+data.rating.toFixed(1)+' Google Rating';
-    el.style.display='inline-flex';
-  }
-  function render(data){
-    updateHeroBadge(data);
-    if(!data||!data.configured||data.error||!data.reviews||!data.reviews.length){showFallback();return;}
-    const ratingStr=data.rating?data.rating.toFixed(1):'';
-    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">'+ratingStr+'</span><span class="grev-stars">'+stars(data.rating)+'</span></div><div class="grev-count">Based on '+(data.total||0)+' Google reviews</div>';
-    items=data.reviews.slice(0,6);
-    sliderEl.innerHTML=items.map((r,i)=>{
-      const av=r.photo?`<img class="grev-av" src="${esc(r.photo)}" alt="">`:`<div class="grev-av-fallback">${esc((r.author||'G')[0])}</div>`;
-      return `<div class="grev-item${i===0?' active':''}" data-i="${i}">
-        <div class="grev-item-stars">${stars(r.rating)}</div>
-        <blockquote>"${esc(r.text)}"</blockquote>
-        <div class="grev-author">${av}<div><div class="grev-author-name">${esc(r.author)}</div><div class="grev-author-time">${esc(r.relativeTime)}</div></div></div>
-      </div>`;
-    }).join('');
-    if(items.length>1){
-      navEl.style.display='flex';
-      dotsEl.innerHTML=items.map((_,i)=>`<span class="grev-dot${i===0?' active':''}" data-i="${i}"></span>`).join('');
-      dotsEl.querySelectorAll('.grev-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
-      prevBtn.addEventListener('click',()=>go(idx-1));
-      nextBtn.addEventListener('click',()=>go(idx+1));
-      timer=setInterval(()=>go(idx+1),6000);
-    }
-  }
-  function go(n){
-    idx=(n+items.length)%items.length;
-    sliderEl.querySelectorAll('.grev-item').forEach((el,i)=>el.classList.toggle('active',i===idx));
-    dotsEl.querySelectorAll('.grev-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
-    if(timer){clearInterval(timer);timer=setInterval(()=>go(idx+1),6000);}
-  }
-  fetch('/.netlify/functions/google-reviews').then(r=>r.json()).then(render).catch(showFallback);
-})();
-// MOCKUP TOOL
-const prods=[
-  {name:'Mug',emoji:'☕',colors:['#ffffff']},
-  {name:'T-Shirt',emoji:'👕',colors:['#ffffff']},
-  {name:'Notebook',emoji:'📓',colors:['#a5713f']},
-  {name:'Flask',emoji:'🧴',colors:['#c0c0c0']},
-  {name:'Cap',emoji:'🧢',colors:['#ffffff']},
-  {name:'Pen',emoji:'🖊️',colors:['#ffffff']},
-  {name:'Tote',emoji:'🎒',colors:['#e8e4dc']},
-  {name:'Power Bank',emoji:'🔋',colors:['#1a1a2e','#ffffff','#374151','#6B2D8B','#2563eb','#dc2626']},
-];
-const PRODUCT_PHOTOS={
-  'Mug':{src:'images/mockups/mug.jpg',fx:.55,fy:.5},
-  'T-Shirt':{src:'images/mockups/tshirt.jpg',fx:.53,fy:.62},
-  'Notebook':{src:'images/mockups/notebook.jpg',fx:.5,fy:.48},
-  'Flask':{src:'images/mockups/flask.jpg',fx:.51,fy:.5},
-  'Cap':{src:'images/mockups/cap.jpg',fx:.45,fy:.42},
-  'Pen':{src:'images/mockups/pen.jpg',fx:.51,fy:.35},
-  'Tote':{src:'images/mockups/tote.jpg',fx:.5,fy:.55},
-};
-function photoRect(img){const pad=30,availW=600-pad*2,availH=480-pad*2;const scale=Math.min(availW/img.naturalWidth,availH/img.naturalHeight);const dw=img.naturalWidth*scale,dh=img.naturalHeight*scale;return{dx:(600-dw)/2,dy:(480-dh)/2,dw,dh};}
-const photoImgs={};
-let photosReady=0;
-const photoNames=Object.keys(PRODUCT_PHOTOS);
-photoNames.forEach(name=>{
-  const img=new Image();
-  img.onload=()=>{photosReady++;if(prods[cp].name===name)draw();};
-  img.src=PRODUCT_PHOTOS[name].src;
-  photoImgs[name]=img;
-});
-let cp=0,cc='#ffffff',li=null,drag={x:300,y:240,on:false,ox:0,oy:0};
-const cv=document.getElementById('mkpCanvas'),ctx=cv.getContext('2d');
-const pp=document.getElementById('prodPick');
-function resetDragForProduct(name){const ph=PRODUCT_PHOTOS[name];const img=photoImgs[name];if(ph&&img&&img.complete&&img.naturalWidth){const r=photoRect(img);drag.x=r.dx+r.dw*ph.fx;drag.y=r.dy+r.dh*ph.fy;}else{drag.x=300;drag.y=240;}}
-prods.forEach((p,i)=>{const b=document.createElement('button');b.className='prod-btn'+(i===0?' active':'');b.innerHTML=p.emoji+'<br>'+p.name;b.onclick=()=>{cp=i;cc=prods[i].colors[0];document.querySelectorAll('.prod-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');bsw(i);resetDragForProduct(p.name);draw();};pp.appendChild(b);});
-function bsw(pi){const name=prods[pi].name;const isPhoto=!!PRODUCT_PHOTOS[name];const colorLbl=document.getElementById('colorLbl'),sw=document.getElementById('swatches');colorLbl.style.display=isPhoto?'none':'block';sw.style.display=isPhoto?'none':'flex';sw.innerHTML='';prods[pi].colors.forEach((c,ci)=>{const s=document.createElement('div');s.className='sw'+(ci===0?' active':'');s.style.cssText='background:'+c+';border-color:'+(c==='#ffffff'?'#ddd':c);s.onclick=()=>{cc=c;document.querySelectorAll('.sw').forEach(x=>x.classList.remove('active'));s.classList.add('active');draw();};sw.appendChild(s);});}
-bsw(0);
-function lx(h,p){try{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16),f=p/100;return'#'+[r,g,b].map(v=>Math.min(255,Math.round(v+(255-v)*f)).toString(16).padStart(2,'0')).join('');}catch(e){return h;}}
-function dk(h,p){try{const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16),f=p/100;return'#'+[r,g,b].map(v=>Math.max(0,Math.round(v*(1-f))).toString(16).padStart(2,'0')).join('');}catch(e){return h;}}
-function groundShadow(cx,by,rx,ry){ctx.save();ctx.shadowColor='transparent';const sg=ctx.createRadialGradient(cx,by,0,cx,by,rx);sg.addColorStop(0,'rgba(20,10,30,.32)');sg.addColorStop(.7,'rgba(20,10,30,.14)');sg.addColorStop(1,'rgba(20,10,30,0)');ctx.fillStyle=sg;ctx.beginPath();ctx.ellipse(cx,by,rx,ry,0,0,Math.PI*2);ctx.fill();ctx.restore();}
-function gloss(px,py,pw,ph,rot){ctx.save();ctx.translate(px,py);if(rot)ctx.rotate(rot);const hg=ctx.createLinearGradient(-pw/2,-ph/2,pw*.15,ph*.5);hg.addColorStop(0,'rgba(255,255,255,.32)');hg.addColorStop(.35,'rgba(255,255,255,.06)');hg.addColorStop(.6,'rgba(255,255,255,0)');ctx.fillStyle=hg;ctx.beginPath();ctx.roundRect(-pw/2,-ph/2,pw,ph,10);ctx.fill();ctx.restore();}
-const GROUND_SHADOWS={
-  'Mug':[290,345,115,18],
-  'T-Shirt':[280,372,110,15],
-  'Notebook':[305,402,115,16],
-  'Flask':[300,428,95,14],
-  'Tote':[280,398,120,16],
-  'Power Bank':[300,362,150,18],
-};
-const PRODUCT_DRAWERS={
-  'Mug':c=>{const g=ctx.createLinearGradient(180,120,420,370);g.addColorStop(0,lx(c,20));g.addColorStop(.5,c);g.addColorStop(1,dk(c,20));ctx.fillStyle=g;ctx.beginPath();ctx.roundRect(180,120,200,220,12);ctx.fill();ctx.fillStyle=dk(c,15);ctx.beginPath();ctx.ellipse(280,120,100,18,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=lx(c,10);ctx.beginPath();ctx.ellipse(280,120,90,14,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle=dk(c,25);ctx.lineWidth=18;ctx.lineCap='round';ctx.beginPath();ctx.arc(395,215,52,-.5*Math.PI,.5*Math.PI);ctx.stroke();ctx.strokeStyle=lx(c,10);ctx.lineWidth=7;ctx.stroke();ctx.fillStyle='rgba(255,255,255,.12)';ctx.beginPath();ctx.ellipse(225,175,16,58,-.3,0,Math.PI*2);ctx.fill();gloss(255,220,90,190,-.05);},
-  'T-Shirt':c=>{ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(170,165);ctx.lineTo(220,145);ctx.quadraticCurveTo(280,135,280,170);ctx.quadraticCurveTo(280,135,340,145);ctx.lineTo(390,165);ctx.lineTo(368,215);ctx.lineTo(338,200);ctx.lineTo(338,365);ctx.lineTo(222,365);ctx.lineTo(222,200);ctx.lineTo(192,215);ctx.closePath();ctx.fill();ctx.fillStyle=dk(c,10);ctx.beginPath();ctx.arc(280,170,24,Math.PI,0);ctx.closePath();ctx.fill();ctx.fillStyle='rgba(255,255,255,.1)';ctx.beginPath();ctx.moveTo(230,175);ctx.quadraticCurveTo(240,260,232,355);ctx.lineTo(250,355);ctx.quadraticCurveTo(256,260,248,178);ctx.closePath();ctx.fill();},
-  'Notebook':c=>{ctx.fillStyle=dk(c,30);ctx.beginPath();ctx.roundRect(205,108,210,290,4);ctx.fill();const ng=ctx.createLinearGradient(200,100,420,400);ng.addColorStop(0,lx(c,15));ng.addColorStop(1,dk(c,15));ctx.fillStyle=ng;ctx.beginPath();ctx.roundRect(200,100,210,290,4);ctx.fill();ctx.fillStyle=dk(c,25);ctx.fillRect(200,100,20,290);ctx.fillStyle='#f5f0e8';ctx.fillRect(218,106,4,278);ctx.strokeStyle=dk(c,40);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(200,258);ctx.lineTo(410,258);ctx.stroke();gloss(315,175,170,140,0);},
-  'Flask':c=>{const fg=ctx.createLinearGradient(215,80,390,420);fg.addColorStop(0,lx(c,25));fg.addColorStop(.4,c);fg.addColorStop(1,dk(c,30));ctx.fillStyle=fg;ctx.beginPath();ctx.roundRect(215,80,170,340,20);ctx.fill();ctx.fillStyle=dk(c,35);ctx.beginPath();ctx.roundRect(230,68,140,30,8);ctx.fill();ctx.fillStyle='rgba(255,255,255,.14)';ctx.beginPath();ctx.ellipse(245,200,14,95,-.2,0,Math.PI*2);ctx.fill();gloss(255,240,55,320,-.03);},
-  'Cap':c=>{ctx.fillStyle=dk(c,20);ctx.beginPath();ctx.ellipse(280,340,175,24,0,0,Math.PI);ctx.fill();const cg=ctx.createLinearGradient(150,130,410,340);cg.addColorStop(0,lx(c,20));cg.addColorStop(1,dk(c,15));ctx.fillStyle=cg;ctx.beginPath();ctx.moveTo(130,340);ctx.quadraticCurveTo(130,130,280,120);ctx.quadraticCurveTo(430,130,430,340);ctx.closePath();ctx.fill();ctx.strokeStyle=dk(c,20);ctx.lineWidth=2.5;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(280,130);ctx.lineTo(280,340);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=dk(c,30);ctx.beginPath();ctx.arc(280,126,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,255,255,.15)';ctx.beginPath();ctx.moveTo(180,160);ctx.quadraticCurveTo(175,240,195,320);ctx.lineTo(215,315);ctx.quadraticCurveTo(198,240,202,165);ctx.closePath();ctx.fill();},
-  'Pen':c=>{ctx.save();ctx.translate(300,240);ctx.rotate(-Math.PI/10);const pg=ctx.createLinearGradient(-130,-11,130,11);pg.addColorStop(0,lx(c,20));pg.addColorStop(.5,c);pg.addColorStop(1,dk(c,20));ctx.fillStyle=pg;ctx.beginPath();ctx.roundRect(-145,-11,290,22,11);ctx.fill();ctx.fillStyle=dk(c,30);ctx.beginPath();ctx.roundRect(60,-13,13,65,4);ctx.fill();ctx.fillStyle='#b0b0b0';ctx.beginPath();ctx.moveTo(-145,-11);ctx.lineTo(-172,0);ctx.lineTo(-145,11);ctx.fill();ctx.fillStyle='rgba(255,255,255,.25)';ctx.beginPath();ctx.roundRect(-140,-9,280,5,3);ctx.fill();ctx.restore();},
-  'Tote':c=>{const tg=ctx.createLinearGradient(170,140,390,400);tg.addColorStop(0,lx(c,15));tg.addColorStop(1,dk(c,10));ctx.fillStyle=tg;ctx.beginPath();ctx.roundRect(170,140,220,250,4);ctx.fill();ctx.strokeStyle=dk(c,30);ctx.lineWidth=12;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(215,140);ctx.quadraticCurveTo(225,60,280,60);ctx.quadraticCurveTo(335,60,345,140);ctx.stroke();gloss(220,265,70,240,0);},
-  'Power Bank':c=>{const bg=ctx.createLinearGradient(155,140,445,360);bg.addColorStop(0,lx(c,25));bg.addColorStop(.5,c);bg.addColorStop(1,dk(c,25));ctx.fillStyle=bg;ctx.beginPath();ctx.roundRect(155,145,290,210,18);ctx.fill();ctx.fillStyle=dk(c,40);ctx.beginPath();ctx.roundRect(168,228,30,13,3);ctx.fill();ctx.beginPath();ctx.roundRect(206,228,24,13,3);ctx.fill();[410,425,440].forEach((x,i)=>{ctx.fillStyle=i===0?'#00ee77':'rgba(255,255,255,.15)';ctx.beginPath();ctx.arc(x,254,5,0,Math.PI*2);ctx.fill();});gloss(230,200,110,110,0);},
-};
-function draw(){
-  ctx.clearRect(0,0,600,480);
-  const bgg=ctx.createLinearGradient(0,0,0,480);bgg.addColorStop(0,'#f8f5ff');bgg.addColorStop(1,'#efe8fb');ctx.fillStyle=bgg;ctx.fillRect(0,0,600,480);
-  const p=prods[cp],c=cc;
-  const ph=PRODUCT_PHOTOS[p.name];
-  if(ph){
-    const img=photoImgs[p.name];
-    if(img&&img.complete&&img.naturalWidth){
-      const r=photoRect(img);
-      ctx.drawImage(img,r.dx,r.dy,r.dw,r.dh);
-    }
-  }else{
-    const gs=GROUND_SHADOWS[p.name];
-    if(gs)groundShadow(...gs);
-    ctx.save();ctx.shadowColor='rgba(107,45,139,.2)';ctx.shadowBlur=36;ctx.shadowOffsetY=10;
-    PRODUCT_DRAWERS[p.name]?.(c);
-    ctx.restore();
-  }
-  if(li){const sz=parseInt(document.getElementById('slSize').value),op=parseInt(document.getElementById('slOp').value)/100;ctx.save();ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=8;ctx.shadowOffsetY=3;ctx.globalAlpha=op;ctx.drawImage(li,drag.x-sz/2,drag.y-sz/2,sz,sz);ctx.globalAlpha=1;ctx.restore();}
-  ctx.fillStyle='rgba(107,45,139,.2)';ctx.font='11px Segoe UI';ctx.textAlign='right';ctx.fillText('reverbmerch.com',596,474);ctx.textAlign='left';
-}
-document.getElementById('logoUpz').addEventListener('click',()=>document.getElementById('logoUp').click());
-document.getElementById('logoUp').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const i=new Image();i.onload=()=>{li=i;drag.x=300;drag.y=240;document.getElementById('mkpHint').style.display='none';draw();};i.src=ev.target.result;};r.readAsDataURL(f);});
-document.getElementById('slSize').addEventListener('input',draw);
-document.getElementById('slOp').addEventListener('input',draw);
-function gcp(e){const rect=cv.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:(t.clientX-rect.left)*(600/rect.width),y:(t.clientY-rect.top)*(480/rect.height)};}
-cv.addEventListener('mousedown',e=>{if(!li)return;const p=gcp(e),sz=parseInt(document.getElementById('slSize').value);if(Math.abs(p.x-drag.x)<sz/2+20&&Math.abs(p.y-drag.y)<sz/2+20){drag.on=true;drag.ox=p.x-drag.x;drag.oy=p.y-drag.y;}});
-cv.addEventListener('mousemove',e=>{if(!drag.on)return;const p=gcp(e);drag.x=p.x-drag.ox;drag.y=p.y-drag.oy;draw();});
-cv.addEventListener('mouseup',()=>drag.on=false);cv.addEventListener('mouseleave',()=>drag.on=false);
-cv.addEventListener('touchstart',e=>{e.preventDefault();if(!li)return;const p=gcp(e);drag.on=true;drag.ox=p.x-drag.x;drag.oy=p.y-drag.y;},{passive:false});
-cv.addEventListener('touchmove',e=>{e.preventDefault();if(!drag.on)return;const p=gcp(e);drag.x=p.x-drag.ox;drag.y=p.y-drag.oy;draw();},{passive:false});
-cv.addEventListener('touchend',()=>drag.on=false);
-draw();
 </script>
+<script src="js/social.js"></script>
+<script src="js/mockup.js"></script>
+<script src="js/videos.js"></script>
 </body>
 </html>

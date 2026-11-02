@@ -11,6 +11,11 @@ reverb-merch-master/
 │                          portfolio grid is rendered from data/portfolio.json)
 ├── css/
 │   └── style.css       ← All page styling (extracted from index.html's <style> block)
+├── js/
+│   ├── mockup.js       ← Logo mockup tool (products, print areas, rendering)
+│   └── videos.js       ← Lazy play/pause for homepage videos
+├── videos/             ← Homepage MP4s + posters (see Homepage Videos)
+├── tools/              ← Scripts that render the videos
 ├── data/
 │   └── portfolio.json  ← "Our Work" portfolio items (title, description, category, image path)
 ├── admin/               ← Decap CMS admin panel (edit portfolio + upload images from the browser)
@@ -120,17 +125,63 @@ with optional email notifications under Forms → Settings → Form notification
 
 ---
 
-## Instagram Live Feed
+## Live Reviews & Instagram Feed
 
-Current section shows portfolio images linking to @reverbmerch.
+The homepage pulls **real** Google reviews, Facebook recommendations and
+Instagram posts through three Netlify Functions (API keys stay server-side,
+responses are cached on Netlify's CDN for 1–6 hours). Front-end code is
+`js/social.js`. Until a function is configured — or if an API is down — each
+widget falls back automatically (review screenshots in `images/reviews/`,
+portfolio photos for Instagram), so nothing ever renders empty.
 
-To connect real Instagram feed:
-1. Create a Meta Developer App at developers.facebook.com
-2. Add Instagram Basic Display product
-3. Get a long-lived access token
-4. Replace the static `.ig-item` divs with a JS fetch from:
-   `https://graph.instagram.com/me/media?fields=id,media_url,thumbnail_url,permalink&access_token=YOUR_TOKEN`
-   (~2 hours dev work)
+Set these in **Netlify → Site configuration → Environment variables**, then
+redeploy:
+
+| Variable | Used by | Notes |
+|----------|---------|-------|
+| `GOOGLE_PLACES_API_KEY` | `google-reviews` | Google Cloud key with **Places API (New)** enabled. Restrict it to that API. |
+| `GOOGLE_PLACE_ID` | `google-reviews` | Optional — defaults to the Reverb Merch Karachi listing. |
+| `META_PAGE_ACCESS_TOKEN` | `facebook-reviews`, `instagram-feed` | Non-expiring **Page** token (steps below). |
+| `FACEBOOK_PAGE_ID` | `facebook-reviews`, `instagram-feed` | Numeric Page ID (Page → About → Page transparency, or Graph Explorer `me?fields=id`). |
+| `INSTAGRAM_USER_ID` | `instagram-feed` | Optional — looked up from the Page if omitted. |
+| `META_GRAPH_VERSION` | Meta functions | Optional, default `v23.0`. Bump when Meta retires it (~2 years per version). |
+
+**Google (≈10 min):** Google Cloud Console → create project → enable
+*Places API (New)* → Credentials → *Create API key* → restrict to Places API
+(New) → paste into `GOOGLE_PLACES_API_KEY`. Billing must be enabled on the
+project; this usage sits well inside Google's free monthly tier. Google only
+ever returns the 5 "most relevant" reviews; the card links to the full list
+and to "Write a review".
+
+**Facebook + Instagram — one token for both (≈20 min):**
+1. Make sure @reverbmerch is an Instagram **Business/Creator** account linked
+   to the Reverb Merch Facebook Page (Instagram app → Settings → Account type;
+   then Page settings → Linked accounts).
+2. At [developers.facebook.com](https://developers.facebook.com) create an app
+   (type *Business*), add the **Instagram Graph API** product.
+3. Open **Graph API Explorer**, pick the app, *Get User Access Token* with
+   `pages_show_list`, `pages_read_engagement`, `pages_read_user_content`,
+   `instagram_basic` → Generate.
+4. Exchange it for a long-lived user token (Access Token Debugger → *Extend
+   Access Token*), then in Explorer call `me/accounts` with that long-lived
+   token and copy the `access_token` of the Reverb Merch Page. A Page token
+   obtained this way **does not expire**.
+5. Put it in `META_PAGE_ACCESS_TOKEN`, the Page's `id` in `FACEBOOK_PAGE_ID`.
+6. For anyone other than app admins/testers to be served, switch the app to
+   **Live** mode (needs a privacy policy URL — the site's `/about.html` page
+   can host one).
+
+Facebook no longer shows star averages for most Pages, so the card shows
+"% recommend" from the fetched recommendations, plus the reviews that have
+text.
+
+*Legacy option:* `INSTAGRAM_ACCESS_TOKEN` (+ `INSTAGRAM_USER_ID`) from the
+previous setup still works, but those tokens expire every 60 days.
+
+**Check a function directly:** visit `/.netlify/functions/google-reviews`
+(or `facebook-reviews`, `instagram-feed`) on the deployed site.
+`{"configured":false}` means the env vars aren't set; an `error` field shows
+the API's message.
 
 ---
 
@@ -249,20 +300,85 @@ to be invited as an Identity user; there's no separate CMS password.
 
 ---
 
+## New Design Previews (A / B)
+
+Two complete alternative homepages with the same content as `index.html`:
+
+| Page | Direction | Files |
+|------|-----------|-------|
+| `new-design-a.html` | Bold agency (ref: merchery.co): dark base, huge condensed type, full-bleed video hero, marquees, bento grids | `css/design-a.css`, `js/design-a.js`, `fonts/design-a/` (Anton + Manrope) |
+| `new-design-b.html` | Warm editorial (ref: madebykept.com): cream base, Fraunces serif, multicolour asterisk motif, stickers, tabbed services | `css/design-b.css`, `js/design-b.js`, `fonts/design-b/` (Fraunces + DM Sans) |
+
+Both reuse the shared `js/mockup.js`, `js/social.js` and `js/videos.js`, so
+the mockup tool, live reviews, Instagram feed and videos behave identically on
+all three pages. A small "Preview: Current · Design A · Design B" switcher
+(bottom-left) jumps between them. The previews are `noindex` with a canonical
+pointing at `/`, so they don't compete with the live homepage in search.
+
+**Choosing one:** copy the chosen `new-design-*.html` over `index.html`,
+remove the `<meta name="robots" content="noindex">` line and the
+`.ds-switch` nav, and delete the other preview's files. Inner pages
+(services, pricing, blog …) still use `css/style.css`; restyling them to
+match is a follow-up.
+
+---
+
+## Homepage Videos
+
+Four short, silent, looping MP4s live in `videos/` (each with a `-poster.jpg`):
+
+| File | Where | What |
+|------|-------|------|
+| `hero-loop.mp4` | Hero, main tile | Slow pan/zoom through client kits |
+| `showreel.mp4` | "See It In Motion" | Captioned showreel of real projects + stats/CTA |
+| `process.mp4` | "See It In Motion" | Animated 4-step process |
+| `logo-on-everything.mp4` | "See It In Motion" | One logo across 12 mockup products |
+
+`js/videos.js` plays each video only while it's on screen (`preload="none"`
+so nothing downloads until needed) and pauses it when scrolled away. Visitors
+with *reduce motion* enabled get the poster and a play button instead.
+
+**To swap in your own footage:** replace the MP4 (H.264, no audio, ideally
+< 3 MB) and its poster JPG with the same filenames — no code changes needed.
+
+**To regenerate them** (e.g. after adding portfolio photos):
+```
+pip install pillow imageio-ffmpeg playwright && playwright install chromium
+python -m http.server 8765            # in the repo root, separate terminal
+python tools/capture_mockups.py <tmp_dir>          # needs <tmp_dir>/vid/mk to exist
+python tools/make_videos.py . <tmp_dir>/vid/mk     # writes videos/*.mp4
+```
+Showreel captions are set in `showreel()` in `tools/make_videos.py`.
+
+---
+
 ## Logo Mockup Tool
 
-Built in HTML5 Canvas — no backend needed. User uploads a PNG logo,
-it composites onto 8 product shapes. Drag to reposition, sliders for
-size and opacity. WhatsApp button links to wa.me/923183241305.
+Lives in `js/mockup.js` (HTML5 Canvas, no backend). 19 products across
+drinkware, apparel, bags, stationery, tech, packaging and accessories — 7 are
+real product photos in `images/mockups/`, the rest are drawn on the canvas with
+selectable colours.
 
-**Adding/editing a product shape:** `draw()` dispatches through two lookup
-objects instead of a long if/else chain — `GROUND_SHADOWS` (product name →
-`[cx, by, rx, ry]` for the floor shadow ellipse, only needed for products that
-sit on a surface) and `PRODUCT_DRAWERS` (product name → a `c => {...}` function
-that draws that shape with color `c` using the shared `ctx`/`lx()`/`dk()`/
-`gloss()` helpers). To add a new product: add an entry to the `prods` array
-(name/emoji/colors), then a matching `PRODUCT_DRAWERS['Your Product']` entry
-(and a `GROUND_SHADOWS` entry too, if it needs a floor shadow).
+**How placement works:** every product has a *print area*. The uploaded logo is
+auto-trimmed (transparent/white padding removed), fitted inside that area with
+its aspect ratio preserved, clipped to it, wrapped around the cylinder on mugs,
+flasks and bottles, and multiplied with the product's own lighting so it looks
+printed rather than pasted on. Visitors can drag (snaps to the centre), resize
+with the slider or mouse wheel, rotate, nudge with arrow keys, pick placement
+presets (centre chest / left chest / full front …) and print styles (full
+colour, white ink, black ink, gold foil, engraved), then download a PNG.
+The WhatsApp button pre-fills the chosen product, colour, style and placement.
+
+**Adding a product:** add an entry to `PRODUCTS` at the top of
+`js/mockup.js`:
+- *Photo product:* `photo: 'images/mockups/x.jpg'` and `area: [x, y, w, h]` as
+  fractions of the photo (e.g. `.4` = 40% across).
+- *Drawn product:* `colors: [...]`, `area` in canvas px (canvas is 600×480),
+  plus a matching `PRODUCT_DRAWERS['Name']` function `(colour, ctx) => {...}`
+  (and a `GROUND_SHADOWS` entry if it sits on a surface).
+- Optional: `cyl: [x0, x1]` cylinder edges for wrap, `shape: 'circle'`,
+  `rot` (base logo rotation, degrees), `style` (default print style), and
+  `presets: [[label, fx, fy, scale%, rotation?]]`.
 
 ---
 
