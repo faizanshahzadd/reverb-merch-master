@@ -94,7 +94,7 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
   <div class="orb orb2"></div>
   <div class="hero-content">
     <div class="hero-badge">✦ Serving All of Pakistan</div>
-    <div class="hero-rating" id="heroRating" style="display:none"></div>
+    <div class="hero-rating" id="heroRating" data-rating-badge style="display:none"></div>
     <h1>Merch That Makes<br>Your Brand <span class="grad-text">Unforgettable</span></h1>
     <p>Premium corporate gifting, branded merchandise, and employee kits for companies that take their brand seriously.</p>
     <div class="hero-btns">
@@ -334,37 +334,37 @@ remaining · <a href="https://wa.me/923183241305" style="color:#fff;font-weight:
 
 <section class="testimonials" id="reviews">
   <p class="section-label">Verified Feedback</p>
-  <h2 class="section-title">What Clients Say on Facebook & Google</h2>
+  <h2 class="section-title">What Clients Say on Google &amp; Facebook</h2>
+  <div class="rev-badge-row"><div class="hero-rating" data-rating-badge style="display:none"></div></div>
   <div class="rev-grid">
-    <div class="rev-card rvl" id="fbRevCard">
-      <div class="grev-head">
-        <div class="rev-g-icon" style="background:#e7f0ff;color:#1877f2">f</div>
-        <div>
-          <div class="grev-score-row"><span class="grev-score">Facebook Reviews</span></div>
-          <div class="grev-count">Real feedback from our page</div>
-        </div>
-      </div>
-      <div class="fb-screens" id="fbScreens">
-        <a href="images/reviews/facebook-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/facebook-review-1.jpg" alt="Facebook review from Muhammad Rashid and Amna Noor" loading="lazy"></a>
-      </div>
-      <p class="rev-more-lnk"><a href="https://www.facebook.com/reverbmerchofficial/reviews" target="_blank" rel="noopener noreferrer">See more on Facebook →</a></p>
-    </div>
-    <div class="rev-card rvr" id="googleRevCard">
+    <div class="rev-card" data-reviews="google">
       <div class="grev-head">
         <div class="rev-g-icon">G</div>
-        <div id="grevSummary">
-          <div class="grev-loading">Loading Google reviews…</div>
-        </div>
+        <div class="rv-summary"><div class="grev-loading">Loading Google reviews…</div></div>
       </div>
-      <div class="grev-slider" id="grevSlider"></div>
-      <div class="grev-nav" id="grevNav" style="display:none">
-        <button id="grevPrev" aria-label="Previous review">←</button>
-        <span id="grevDots" class="grev-dots"></span>
-        <button id="grevNext" aria-label="Next review">→</button>
+      <div class="grev-slider rv-slider"></div>
+      <div class="grev-nav rv-nav" style="display:none">
+        <button type="button" class="rv-prev" aria-label="Previous review">←</button>
+        <span class="grev-dots rv-dots"></span>
+        <button type="button" class="rv-next" aria-label="Next review">→</button>
       </div>
+      <p class="rev-more-lnk rv-links"></p>
+    </div>
+    <div class="rev-card" data-reviews="facebook">
+      <div class="grev-head">
+        <div class="rev-g-icon" style="background:#e7f0ff;color:#1877f2">f</div>
+        <div class="rv-summary"><div class="grev-loading">Loading Facebook reviews…</div></div>
+      </div>
+      <div class="grev-slider rv-slider"></div>
+      <div class="grev-nav rv-nav" style="display:none">
+        <button type="button" class="rv-prev" aria-label="Previous review">←</button>
+        <span class="grev-dots rv-dots"></span>
+        <button type="button" class="rv-next" aria-label="Next review">→</button>
+      </div>
+      <p class="rev-more-lnk rv-links"></p>
     </div>
   </div>
-  <p style="text-align:center;margin-top:18px"><a href="https://www.google.com/search?q=reverb+merch+karachi+reviews" target="_blank" rel="noopener noreferrer" style="color:var(--p);font-weight:700;font-size:.88rem;text-decoration:none">See full Google reviews →</a> &nbsp;·&nbsp; <a href="testimonials.html" style="color:var(--p);font-weight:700;font-size:.88rem;text-decoration:none">Read all testimonials →</a></p>
+  <p class="rev-all"><a href="testimonials.html">Read all testimonials →</a></p>
 </section>
 
 <section class="instagram" id="instagram">
@@ -575,77 +575,8 @@ document.getElementById('pfNext').addEventListener('click',()=>{const pg=documen
 document.getElementById('pfGrid').addEventListener('scroll',updatePfArrows);
 window.addEventListener('resize',updatePfArrows);
 document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q').addEventListener('click',()=>{const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');});});
-// INSTAGRAM FEED
-(function(){
-  const grid=document.getElementById('igGrid');
-  if(!grid)return;
-  const igSvg='<svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>';
-  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function showFallback(){
-    grid.innerHTML='<div class="ig-fallback"><p>See our latest posts, behind-the-scenes, and client unboxings on Instagram.</p><a href="https://instagram.com/reverbmerch" target="_blank" rel="noopener noreferrer">Visit @reverbmerch →</a></div>';
-  }
-  fetch('/.netlify/functions/instagram-feed').then(r=>r.json()).then(data=>{
-    if(!data||!data.configured||data.error||!data.posts||!data.posts.length){showFallback();return;}
-    grid.innerHTML=data.posts.map(p=>`<a class="ig-item" href="${esc(p.permalink)}" target="_blank" rel="noopener noreferrer"><img src="${esc(p.image)}" alt="${esc(p.caption)||'@reverbmerch post'}" loading="lazy"><div class="ig-ov">${igSvg}</div></a>`).join('');
-  }).catch(showFallback);
-})();
-// GOOGLE REVIEWS
-(function(){
-  const summaryEl=document.getElementById('grevSummary');
-  const sliderEl=document.getElementById('grevSlider');
-  const navEl=document.getElementById('grevNav');
-  const dotsEl=document.getElementById('grevDots');
-  const prevBtn=document.getElementById('grevPrev');
-  const nextBtn=document.getElementById('grevNext');
-  if(!summaryEl)return;
-  let idx=0,items=[],timer=null;
-  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function stars(n){const r=Math.round(n||0);return '★★★★★☆☆☆☆☆'.slice(5-r,10-r);}
-  function showFallback(){
-    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">5.0</span><span class="grev-stars">★★★★★</span></div><div class="grev-count">Real reviews from Google</div>';
-    sliderEl.innerHTML='<div class="fb-screens">'+
-      '<a href="images/reviews/google-review-1.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-1.jpg" alt="Google reviews from Aleena Ahtesham, Naveed Ahmad, and Riffat Nazia" loading="lazy"></a>'+
-      '<a href="images/reviews/google-review-2.jpg" target="_blank" rel="noopener noreferrer"><img src="images/reviews/google-review-2.jpg" alt="Google reviews from Riffat Nazia, Jumana Rizvi, and Tanveer Ali" loading="lazy"></a>'+
-    '</div>';
-  }
-  function updateHeroBadge(data){
-    const el=document.getElementById('heroRating');
-    if(!el||!data||!data.rating)return;
-    el.innerHTML='<span class="hr-stars">★</span> '+data.rating.toFixed(1)+' Google Rating';
-    el.style.display='inline-flex';
-  }
-  function render(data){
-    updateHeroBadge(data);
-    if(!data||!data.configured||data.error||!data.reviews||!data.reviews.length){showFallback();return;}
-    const ratingStr=data.rating?data.rating.toFixed(1):'';
-    summaryEl.innerHTML='<div class="grev-score-row"><span class="grev-score">'+ratingStr+'</span><span class="grev-stars">'+stars(data.rating)+'</span></div><div class="grev-count">Based on '+(data.total||0)+' Google reviews</div>';
-    items=data.reviews.slice(0,6);
-    sliderEl.innerHTML=items.map((r,i)=>{
-      const av=r.photo?`<img class="grev-av" src="${esc(r.photo)}" alt="">`:`<div class="grev-av-fallback">${esc((r.author||'G')[0])}</div>`;
-      return `<div class="grev-item${i===0?' active':''}" data-i="${i}">
-        <div class="grev-item-stars">${stars(r.rating)}</div>
-        <blockquote>"${esc(r.text)}"</blockquote>
-        <div class="grev-author">${av}<div><div class="grev-author-name">${esc(r.author)}</div><div class="grev-author-time">${esc(r.relativeTime)}</div></div></div>
-      </div>`;
-    }).join('');
-    if(items.length>1){
-      navEl.style.display='flex';
-      dotsEl.innerHTML=items.map((_,i)=>`<span class="grev-dot${i===0?' active':''}" data-i="${i}"></span>`).join('');
-      dotsEl.querySelectorAll('.grev-dot').forEach(d=>d.addEventListener('click',()=>go(parseInt(d.dataset.i))));
-      prevBtn.addEventListener('click',()=>go(idx-1));
-      nextBtn.addEventListener('click',()=>go(idx+1));
-      timer=setInterval(()=>go(idx+1),6000);
-    }
-  }
-  function go(n){
-    idx=(n+items.length)%items.length;
-    sliderEl.querySelectorAll('.grev-item').forEach((el,i)=>el.classList.toggle('active',i===idx));
-    dotsEl.querySelectorAll('.grev-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
-    if(timer){clearInterval(timer);timer=setInterval(()=>go(idx+1),6000);}
-  }
-  fetch('/.netlify/functions/google-reviews').then(r=>r.json()).then(render).catch(showFallback);
-})();
 </script>
+<script src="js/social.js"></script>
 <script src="js/mockup.js"></script>
 <script src="js/videos.js"></script>
 </body>

@@ -125,17 +125,63 @@ with optional email notifications under Forms → Settings → Form notification
 
 ---
 
-## Instagram Live Feed
+## Live Reviews & Instagram Feed
 
-Current section shows portfolio images linking to @reverbmerch.
+The homepage pulls **real** Google reviews, Facebook recommendations and
+Instagram posts through three Netlify Functions (API keys stay server-side,
+responses are cached on Netlify's CDN for 1–6 hours). Front-end code is
+`js/social.js`. Until a function is configured — or if an API is down — each
+widget falls back automatically (review screenshots in `images/reviews/`,
+portfolio photos for Instagram), so nothing ever renders empty.
 
-To connect real Instagram feed:
-1. Create a Meta Developer App at developers.facebook.com
-2. Add Instagram Basic Display product
-3. Get a long-lived access token
-4. Replace the static `.ig-item` divs with a JS fetch from:
-   `https://graph.instagram.com/me/media?fields=id,media_url,thumbnail_url,permalink&access_token=YOUR_TOKEN`
-   (~2 hours dev work)
+Set these in **Netlify → Site configuration → Environment variables**, then
+redeploy:
+
+| Variable | Used by | Notes |
+|----------|---------|-------|
+| `GOOGLE_PLACES_API_KEY` | `google-reviews` | Google Cloud key with **Places API (New)** enabled. Restrict it to that API. |
+| `GOOGLE_PLACE_ID` | `google-reviews` | Optional — defaults to the Reverb Merch Karachi listing. |
+| `META_PAGE_ACCESS_TOKEN` | `facebook-reviews`, `instagram-feed` | Non-expiring **Page** token (steps below). |
+| `FACEBOOK_PAGE_ID` | `facebook-reviews`, `instagram-feed` | Numeric Page ID (Page → About → Page transparency, or Graph Explorer `me?fields=id`). |
+| `INSTAGRAM_USER_ID` | `instagram-feed` | Optional — looked up from the Page if omitted. |
+| `META_GRAPH_VERSION` | Meta functions | Optional, default `v23.0`. Bump when Meta retires it (~2 years per version). |
+
+**Google (≈10 min):** Google Cloud Console → create project → enable
+*Places API (New)* → Credentials → *Create API key* → restrict to Places API
+(New) → paste into `GOOGLE_PLACES_API_KEY`. Billing must be enabled on the
+project; this usage sits well inside Google's free monthly tier. Google only
+ever returns the 5 "most relevant" reviews; the card links to the full list
+and to "Write a review".
+
+**Facebook + Instagram — one token for both (≈20 min):**
+1. Make sure @reverbmerch is an Instagram **Business/Creator** account linked
+   to the Reverb Merch Facebook Page (Instagram app → Settings → Account type;
+   then Page settings → Linked accounts).
+2. At [developers.facebook.com](https://developers.facebook.com) create an app
+   (type *Business*), add the **Instagram Graph API** product.
+3. Open **Graph API Explorer**, pick the app, *Get User Access Token* with
+   `pages_show_list`, `pages_read_engagement`, `pages_read_user_content`,
+   `instagram_basic` → Generate.
+4. Exchange it for a long-lived user token (Access Token Debugger → *Extend
+   Access Token*), then in Explorer call `me/accounts` with that long-lived
+   token and copy the `access_token` of the Reverb Merch Page. A Page token
+   obtained this way **does not expire**.
+5. Put it in `META_PAGE_ACCESS_TOKEN`, the Page's `id` in `FACEBOOK_PAGE_ID`.
+6. For anyone other than app admins/testers to be served, switch the app to
+   **Live** mode (needs a privacy policy URL — the site's `/about.html` page
+   can host one).
+
+Facebook no longer shows star averages for most Pages, so the card shows
+"% recommend" from the fetched recommendations, plus the reviews that have
+text.
+
+*Legacy option:* `INSTAGRAM_ACCESS_TOKEN` (+ `INSTAGRAM_USER_ID`) from the
+previous setup still works, but those tokens expire every 60 days.
+
+**Check a function directly:** visit `/.netlify/functions/google-reviews`
+(or `facebook-reviews`, `instagram-feed`) on the deployed site.
+`{"configured":false}` means the env vars aren't set; an `error` field shows
+the API's message.
 
 ---
 
