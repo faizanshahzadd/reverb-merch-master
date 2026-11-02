@@ -210,7 +210,7 @@ function drawBase(){
 function prepLogo(img){
   const max=1000,s=Math.min(1,max/Math.max(img.naturalWidth||img.width,img.naturalHeight||img.height));
   const w=Math.max(1,Math.round((img.naturalWidth||img.width)*s)),h=Math.max(1,Math.round((img.naturalHeight||img.height)*s));
-  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.drawImage(img,0,0,w,h);
+  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,w,h);
   const id=x.getImageData(0,0,w,h);
   const clean=new ImageData(new Uint8ClampedArray(id.data),w,h),d=clean.data;
   for(let i=0;i<d.length;i+=4){const m=Math.min(d[i],d[i+1],d[i+2]);if(m>205){d[i+3]=Math.round(d[i+3]*Math.max(0,Math.min(1,(245-m)/40)));}}
