@@ -11,6 +11,8 @@ reverb-merch-master/
 │                          portfolio grid is rendered from data/portfolio.json)
 ├── css/
 │   └── style.css       ← All page styling (extracted from index.html's <style> block)
+├── js/
+│   └── mockup.js       ← Logo mockup tool (products, print areas, rendering)
 ├── data/
 │   └── portfolio.json  ← "Our Work" portfolio items (title, description, category, image path)
 ├── admin/               ← Decap CMS admin panel (edit portfolio + upload images from the browser)
@@ -251,18 +253,31 @@ to be invited as an Identity user; there's no separate CMS password.
 
 ## Logo Mockup Tool
 
-Built in HTML5 Canvas — no backend needed. User uploads a PNG logo,
-it composites onto 8 product shapes. Drag to reposition, sliders for
-size and opacity. WhatsApp button links to wa.me/923183241305.
+Lives in `js/mockup.js` (HTML5 Canvas, no backend). 19 products across
+drinkware, apparel, bags, stationery, tech, packaging and accessories — 7 are
+real product photos in `images/mockups/`, the rest are drawn on the canvas with
+selectable colours.
 
-**Adding/editing a product shape:** `draw()` dispatches through two lookup
-objects instead of a long if/else chain — `GROUND_SHADOWS` (product name →
-`[cx, by, rx, ry]` for the floor shadow ellipse, only needed for products that
-sit on a surface) and `PRODUCT_DRAWERS` (product name → a `c => {...}` function
-that draws that shape with color `c` using the shared `ctx`/`lx()`/`dk()`/
-`gloss()` helpers). To add a new product: add an entry to the `prods` array
-(name/emoji/colors), then a matching `PRODUCT_DRAWERS['Your Product']` entry
-(and a `GROUND_SHADOWS` entry too, if it needs a floor shadow).
+**How placement works:** every product has a *print area*. The uploaded logo is
+auto-trimmed (transparent/white padding removed), fitted inside that area with
+its aspect ratio preserved, clipped to it, wrapped around the cylinder on mugs,
+flasks and bottles, and multiplied with the product's own lighting so it looks
+printed rather than pasted on. Visitors can drag (snaps to the centre), resize
+with the slider or mouse wheel, rotate, nudge with arrow keys, pick placement
+presets (centre chest / left chest / full front …) and print styles (full
+colour, white ink, black ink, gold foil, engraved), then download a PNG.
+The WhatsApp button pre-fills the chosen product, colour, style and placement.
+
+**Adding a product:** add an entry to `PRODUCTS` at the top of
+`js/mockup.js`:
+- *Photo product:* `photo: 'images/mockups/x.jpg'` and `area: [x, y, w, h]` as
+  fractions of the photo (e.g. `.4` = 40% across).
+- *Drawn product:* `colors: [...]`, `area` in canvas px (canvas is 600×480),
+  plus a matching `PRODUCT_DRAWERS['Name']` function `(colour, ctx) => {...}`
+  (and a `GROUND_SHADOWS` entry if it sits on a surface).
+- Optional: `cyl: [x0, x1]` cylinder edges for wrap, `shape: 'circle'`,
+  `rot` (base logo rotation, degrees), `style` (default print style), and
+  `presets: [[label, fx, fy, scale%, rotation?]]`.
 
 ---
 
