@@ -12,7 +12,10 @@ reverb-merch-master/
 ├── css/
 │   └── style.css       ← All page styling (extracted from index.html's <style> block)
 ├── js/
-│   └── mockup.js       ← Logo mockup tool (products, print areas, rendering)
+│   ├── mockup.js       ← Logo mockup tool (products, print areas, rendering)
+│   └── videos.js       ← Lazy play/pause for homepage videos
+├── videos/             ← Homepage MP4s + posters (see Homepage Videos)
+├── tools/              ← Scripts that render the videos
 ├── data/
 │   └── portfolio.json  ← "Our Work" portfolio items (title, description, category, image path)
 ├── admin/               ← Decap CMS admin panel (edit portfolio + upload images from the browser)
@@ -248,6 +251,35 @@ to be invited as an Identity user; there's no separate CMS password.
 3. Contact form: use Formspree (see above)
 4. Note: the `/admin` panel requires Netlify Identity + Git Gateway and will
    **not** work on a non-Netlify host
+
+---
+
+## Homepage Videos
+
+Four short, silent, looping MP4s live in `videos/` (each with a `-poster.jpg`):
+
+| File | Where | What |
+|------|-------|------|
+| `hero-loop.mp4` | Hero, main tile | Slow pan/zoom through client kits |
+| `showreel.mp4` | "See It In Motion" | Captioned showreel of real projects + stats/CTA |
+| `process.mp4` | "See It In Motion" | Animated 4-step process |
+| `logo-on-everything.mp4` | "See It In Motion" | One logo across 12 mockup products |
+
+`js/videos.js` plays each video only while it's on screen (`preload="none"`
+so nothing downloads until needed) and pauses it when scrolled away. Visitors
+with *reduce motion* enabled get the poster and a play button instead.
+
+**To swap in your own footage:** replace the MP4 (H.264, no audio, ideally
+< 3 MB) and its poster JPG with the same filenames — no code changes needed.
+
+**To regenerate them** (e.g. after adding portfolio photos):
+```
+pip install pillow imageio-ffmpeg playwright && playwright install chromium
+python -m http.server 8765            # in the repo root, separate terminal
+python tools/capture_mockups.py <tmp_dir>          # needs <tmp_dir>/vid/mk to exist
+python tools/make_videos.py . <tmp_dir>/vid/mk     # writes videos/*.mp4
+```
+Showreel captions are set in `showreel()` in `tools/make_videos.py`.
 
 ---
 
